@@ -1,0 +1,16 @@
+<table>
+<tr><span style='color:#259;margin-left:5px;'>热门标签· · · ·<%=link_to '更多',tags_path,:class=>'more'%></span></tr>
+<%i=0 
+  @tags.each do |t|%>
+    <%if i==0%>
+	<tr>
+	<%end%>
+	<td><%=render :partial=>'tags/card', :locals=>{:tag=>t}%></td>
+<%
+  i+=1
+  if i==3%>
+    </tr>
+<%  i=0
+  end
+end%>
+</table>

@@ -1,0 +1,47 @@
+<div class='a_lp_main'>
+<script>
+$(function() {
+		var availableTags = [];
+		var tagid="#"+"<%=inputid.to_s%>";
+		$(tagid).autocomplete({
+			source: __SITE__+"/activities/autopick",
+			select:function (event, ui){
+				$('input[tagid='+tagid+']').val(ui.item.id);
+				$('input[tagid=#<%=l_inputid%>]').val(ui.item.location_id);
+
+				$('input[tagid='+tagid+']').attr('iname',ui.item.title);
+				$('input[tagid=#<%=l_inputid%>]').attr('iname',ui.item.location_name);
+
+				
+			},
+			focus: function(){
+				return false;
+			},
+			close: function(event, ui) {
+				$(tagid).val($('input[tagid='+tagid+']').attr('iname'));
+				$('#<%=l_inputid%>').val($('input[tagid=#<%=l_inputid%>]').attr('iname'));
+
+			}
+
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {  // Here defines the layout of autocomplete
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a style='cursor:pointer;'><span style='float:left;width:auto;'>" + item.title + "</span><br/></a><span style='float:left;margin-left:20px;font-size:6pt;'>"+"@"+ item.location_name+"</span>")
+				.appendTo( ul );
+		};
+});
+</script>
+<%=stylesheet_link_tag 'activities_autopick'%>
+<div id='main'>
+<% if activity_id!='0' && activity_id!=0
+   		default=Activity.find(activity_id).title
+   else
+   		default=''
+   end%>
+<div class='input_aap_wrapper'>
+<input type='text' id='<%=inputid%>' value='<%=default%>', class='input_aap', placeholder='输入关键字查找活动'/>
+</div>
+<input type='hidden' name='activity_id' tagid='#<%=inputid.to_s%>' value='<%=activity_id%>'/>
+</div>
+
+</div>

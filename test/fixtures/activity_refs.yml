@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  activity_id: 1
+  ref_name: MyString
+  refnum: 1
+
+two:
+  activity_id: 1
+  ref_name: MyString
+  refnum: 1

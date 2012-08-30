@@ -1,0 +1,9 @@
+  
+<%c=@comment%>
+
+
+  	var o1=$('.tweet_comment_button[tweet_id=<%=@tweet.id%>]');
+  	o1.html("留言("+(parseInt(o1.html().substring(3,o1.html().length-1))+1)+")");
+
+
+  	loadcomments_tweet('<%=@tweet.id%>');

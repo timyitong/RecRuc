@@ -1,0 +1,138 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+#user_info
+{
+ float:left;
+ width:20%;
+ height:auto;
+}
+#user_main_content
+{
+ float:left;
+ width:80%;
+ height:auto; 
+}
+.user_group
+{
+  width:auto;
+  height:20px;
+  color:black;
+  
+}
+.user_group:hover
+{
+  width:auto;
+  height:20px;
+  color:white;
+  background-color:black;
+  
+}
+
+//profile::
+.profile
+{
+  text-align:left;
+  width:100%;
+  @include radius1(10px);
+  background-color: #ffffff;
+  height:auto;
+  float:left;
+}
+.icon
+{
+  float:left;
+  width:64px;
+  height:64px;
+  @include radius1(5px);
+  margin:16px;
+}
+.name
+{
+  height:50px;
+  width:50px;
+  float:left;
+}
+.profile_line
+{
+  float:left;
+  padding-left:4%;
+  width:100%;
+  p{
+    font-size:8pt;
+  }
+}
+.for_name
+{
+  font-size:18pt;
+  float:left;
+  margin-top:16px;
+}
+.profile_right{
+  width:auto;
+  height:auto;
+  float: left
+}
+.edit_user_button{
+  float:right;
+  margin-right:20px;
+  margin-bottom:5px;
+}
+.profile_operate{
+  float:left;
+  width:70%;
+  margin-right:30%;
+  background-color:#ffffff;
+}
+.profile_o_button{
+
+  display: block;
+  width:80px;
+  height:24px;
+  padding-top:3px;
+  margin-top:13px;
+  float:right;
+  font-size:9pt;
+  background-color: #ffffff;
+  color:#336699;
+
+  border-bottom:1px solid #d9dce2;
+  cursor:pointer;
+  text-align:center;
+
+  
+}
+.profile_o_button:hover{
+  @extend .profile_o_button;
+  
+}
+.profile_o_button_clicked{
+  @extend .profile_o_button:hover;
+      color:black;
+  font-weight:bold;
+border-radius: 5px 5px 0 0;
+-moz-border-radius: 5px 5px 0 0;
+-webkit-border-radius: 5px 5px 0 0;
+  border-top:1px solid #d9dce2;
+  border-left:1px solid #d9dce2;
+  border-right:1px solid #d9dce2;
+  border-bottom:1px solid #ffffff;
+  z-index:1;
+}
+#user_feed_box{
+  width:75%;
+  float:left;
+  height:auto;
+  margin-left:-2px;
+  
+
+}

@@ -1,0 +1,25 @@
+<h1>Listing user_follow_tags</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Follow</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_follow_tags.each do |user_follow_tag| %>
+  <tr>
+    <td><%= user_follow_tag.user_id %></td>
+    <td><%= user_follow_tag.follow_id %></td>
+    <td><%= link_to 'Show', user_follow_tag %></td>
+    <td><%= link_to 'Edit', edit_user_follow_tag_path(user_follow_tag) %></td>
+    <td><%= link_to 'Destroy', user_follow_tag, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User follow tag', new_user_follow_tag_path %>

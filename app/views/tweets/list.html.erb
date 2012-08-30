@@ -1,0 +1,181 @@
+
+<%=stylesheet_link_tag 'tweets'%>
+<%=javascript_include_tag javascript_path('tweet_list')%>
+<script>
+$(function(){
+  $('a[switch]').click(function(){
+    $('#wrapper-'+$(this).attr('switch')).scrollTo($(this).attr('tag'), 500);
+  });
+
+$('.picbox').toggle(function(){
+    $(this).empty();
+    $('<img/>').attr('src',$(this).attr('large')).appendTo($(this));
+    $(this).css('cursor','default');
+},function (){
+    $(this).empty();
+    $('<img/>').attr('src',$(this).attr('small')).appendTo($(this));
+    //document.write(<%=image_path('large.cur')%>+", auto");
+    $(this).css('cursor',"url('"+__SITE__+"/assets/large.cur'), auto");
+});
+
+
+$('.f_c_name[tid]').each(function(){
+  $(this).bubbletip($('#user_tip_'+$(this).attr('tid') ),{
+    delayShow: 500,
+    delayHide: 200
+  });
+});
+
+
+
+
+
+});
+
+</script>
+
+<% @tweets.each do |t|%>
+
+<div class='feed_main'>
+  <div class='feed_c_main'>
+
+      <div class='wrapper' id='wrapper-<%=t.id%>'>
+       <ul class='mask'>
+
+        <li class='box' id='<%=t.id%>-box1'>
+        <dl>
+              <dt class='feed_avatar'>
+                <a class='avatar' style="background-image:url('<%= t.user.avatar.url(:thumb)%>');">
+
+                </a>
+                
+              </dt>
+
+              
+              <dd class='feed_content'>
+          	          
+                <div class='feed_tweet_content'>
+                	<div class='f_c_content'>
+          	        <%=link_to t.user.name, user_path(t.user),:class=>:f_c_name,:tid=>t.id%><p>: <%=t.content%></p>
+          	      <%@user=t.user%>
+                  <div id="user_tip_<%=t.id%>" style="display:none;" class='tip'>
+                                              <div class='profile'>
+
+                                                <%if @user.avatar_file_name!=nil%>
+                                                <div class='icon' style="background:url('<%=@user.avatar.url(:thumb)%>');" ></div>
+                                                <%else%>
+                                                <div class='icon' style="background:url('<%=image_path("no-image.gif")%>');" ></div>
+                                                <%end%>
+
+                                                <div class='profile_right'>
+                                                  <div class='profile_line'>
+                                                    &nbsp;
+                                                  </div>
+                                                  <div class='profile_line'>
+                                                    <span style='font-size:14px;margin-top:16px;'><%= @user.name %></span>
+                                                  </div>
+
+                                                  <div class='profile_line'>
+                                                  <p><strong>Email:</strong><%= @user.email %></p>
+                                                  </div>
+
+                                                  <div class='profile_line'>
+                                                  <p><strong>性别:</strong><%= @user.gender %>
+                                                    <%if @user.id==session[:current_user_id]%>
+                                                    <%=link_to '修改', edit_user_path(@user), :class=>'edit_user_button'%></p>
+                                                    <%else%>
+                                                    <%=render :partial=>'public/follow_button',:locals=>{:target=>'user',:follow_id=>@user.id}%>
+                                                    <%end%>
+                                                  </div>
+                                                  <div class='profile_line'>
+
+                                                  </div>
+                                                </div>
+                                              </div>
+                  </div>
+                  
+                  </div>
+              <%
+                    #Here is the retweet
+              if t.retweet_id!=0
+                			rt=Tweet.find(t.retweet_id)
+                		%>
+                    <div class='f_c_line' style='padding:0;position:relative;height:10px;'> <%=image_tag image_path('ltri.png'),:style=>'position:relative;bottom:5px;left:20px;'%></div> 
+                		<div class='feed_tweet_rt'>
+                			  <p>
+                          <a class='namecard' href='<%=user_path(rt.user)%>'>@<%=rt.user.name%></a>
+                			    :<%=rt.content%>
+                        </p>
+                        <% if rt.t_photo_file_name!=nil%>
+                        <div class='picbox' large='<%=rt.t_photo.url(:large)%>' small='<%=rt.t_photo.url(:small)%>'>
+                          <%=image_tag rt.t_photo.url(:small)%>
+                        </div>
+                        <%end%>
+                        <div class='ope'>
+                            <div class='f_c_location'><%=link_to '@'+rt.location.name, location_path(rt.location)%>
+                            </div>
+                                      <%if rt.activity_id!=0%>
+                                      
+                                      <a class='fct_title' href='<%=activity_path(rt.activity)%>'>
+                                        来自活动: <%= rt.activity.title%>
+                                      </a>
+                                      <%end%>                          
+                        </div>
+                        <div class='ope'>
+                          <%=link_to rt.created_at.strftime('%Y年%m月%d日 %H:%M'),tweet_path(t.id),:class=>'time'%>
+                          <a class='rt_button'>原文转发(<%=rt.retweetsnum%>)</a><a class='rt_c_button'>原文评论(<%=rt.commentsnum%>)</a>
+                        </div>
+                		</div>
+              <%end%>
+              <% if t.t_photo_file_name!=nil%>
+              <div class='picbox'  large='<%=t.t_photo.url(:large)%>' small='<%=t.t_photo.url(:small)%>'>
+                <%=image_tag t.t_photo.url(:small)%>
+              </div>
+              <%end%>
+              </div>
+
+            <div class='f_c_line'>
+                <div class='f_c_location'><%=link_to '@'+t.location.name, location_path(t.location)%>
+                </div>
+                          <%if t.activity_id!=0%>
+                          
+                          <a class='fct_title' href='<%=activity_path(t.activity)%>'>
+                            来自活动: <%= t.activity.title%>
+                          </a>
+                          <%end%>
+            </div>
+            <div class='f_c_line'>
+                <%=link_to t.created_at.strftime('%Y年%m月%d日 %H:%M'),tweet_path(t.id),:class=>'time'%>
+          	    <a href='javascript:void(0);' tag='#<%=t.id%>-box2' tweet_id='<%=t.id%>' class='tweet_share_button' switch='<%=t.id%>'>转发(<%=t.retweetsnum%>)</a>
+          	    <a href='javascript:void(0);' tweet_id='<%=t.id%>' class='tweet_comment_button' >留言(<%=t.commentsnum%>)</a>
+            </div>
+
+            <div class='comment_feed' tweet_id='<%=t.id%>' stat='close' style='float:left;margin:10px;background:#f3f3f3;width:100%;'>
+            </div>
+<!--feed_content end-->
+                </dd>
+                </dl>
+              </li>
+      <%
+      if t.retweet_id==0
+        rid=t.id
+      else
+        rid=t.retweet_id
+      end
+      %>
+              <li class='box' id='<%=t.id%>-box2' style='position:relative;'>
+                <div class='retweet_box'>
+                <%=render :partial=>'tweets/new',:locals=>{:retweet_id=>rid,:activity_id=>t.activity_id,:location_id=>t.location_id,:d_text=>"//@"+t.user.name+":"+t.content,:parent_id=>t.id}%>
+                </div>
+                <a  tag='#<%=t.id%>-box1' switch='<%=t.id%>' class='tweet_back'>返回</a>
+              </li>
+          </ul>
+        </div>
+  </div>
+
+
+</div>
+
+
+
+<%end%>

@@ -1,0 +1,24 @@
+<%
+url=nil
+
+ case icon_type
+	 when 'tag'
+	 	if obj.icon_file_name!=nil
+	 		url=obj.icon.url(:normal)
+	 	end
+	 when 'user'
+	 	if obj.avatar_file_name!=nil
+	 		url=obj.avatar.url(:thumb)
+	 	end
+	 when 'location'
+	 	if obj.location_icon_file_name!=nil
+	 		url=obj.location_icon.url(:normal)
+	 	end
+ end
+
+ if url==nil
+ 	url=image_path("no-image.gif")
+ end
+%>
+<div class='icon' style="background:url('<%=url%>') no-repeat;">
+</div>

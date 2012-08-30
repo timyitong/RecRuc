@@ -1,0 +1,2 @@
+module ActivityTweetsHelper
+end

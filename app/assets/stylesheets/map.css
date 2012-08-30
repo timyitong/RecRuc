@@ -1,0 +1,289 @@
+
+
+#location_map_main{
+  width:100%;
+  height:550px;
+  float:left;
+  margin-top:-60px;
+}
+
+#map_edge{
+  width:800px;
+  height:550px;
+  border: 1px solid black;
+  float:left;
+  z-index:10;
+}
+.info_mask{
+  height:200%;
+  width:100%;
+  float:left;
+  display:block;
+    margin:0;
+  padding:0;
+}
+.infoli{
+  height:50%;
+  width:100%;
+  float:left;
+    margin:0;
+  padding:10px;
+}
+#loc_info{
+  height:150px;
+  float:left;
+  width:70%;
+overflow: hidden;
+}
+
+#map_box{
+  @extend #map_edge;
+  border:none;
+
+
+}
+#map_navi{
+  width:100%;
+  height:150px;
+  float:left;
+}
+.map_navi_button{
+  float:left;
+  width:50px;
+  height:50px;
+  margin-left:10px;
+  margin-right:10px;
+  margin-top:60px;
+}
+#up{
+  background:url('up.png');
+}
+#back{
+   background:url('back.png');
+}
+#next{
+  background:url('forward.png');
+}
+#up:hover{
+  background:url('up2.png');
+}
+#back:hover{
+   background:url('back2.png');
+}
+#next:hover{
+  background:url('forward2.png');
+}
+#map_op{
+  height:100%;
+  width:30%;
+  float:left;
+}
+
+#map_main{
+  width:100%;
+  height:400px;
+  float:left;
+  overflow: hidden;
+  background:#fff;
+  
+}
+#map_mask{
+  width:auto;
+  min-width:200%;
+  height:auto;
+  float:left;
+  margin:0;
+}
+.mli{
+  width:800px;
+  height:400px;
+  float:none;
+  margin:0;
+  padding:0;
+  display:block;
+  overflow: hidden;
+  position: relative;
+}
+
+.map_ul_mask{
+  margin:0;
+  padding:0;
+  z-index:10;
+  float: none;
+  position:relative;
+  top:0px;
+  left:0px;
+}
+.map_li{
+  margin:0;
+  padding:0;
+  float:none;
+  height:400px;
+  width:800px;
+  z-index:10;
+  background-color:red;
+  border-radius:15px;
+}
+.map_img{
+  float:left;
+}
+
+#info_box{
+  border-top: 1px solid black;  border-right: 1px solid black;  border-bottom: 1px solid black;
+  float:left;
+  height:550px;
+  width:420px;
+}
+#info_head{
+  height:30px;
+}
+#info_main{
+  height:70px;
+}
+#info_edit{
+  height:150px;
+}
+#info_route{
+  height:50px;
+  text-align:left;
+}
+#info_index{
+  height:250px;
+  text-align:right;
+}
+.point_button{
+  cursor:pointer;
+  position: absolute;
+}
+.point_button:hover{
+  cursor:pointer;
+}
+.point_button_show{
+  @extend .point_button;
+}
+.point_button_show:hover{
+  @extend .point_button;
+}
+.point_text{
+  @extend .point_button;
+}
+#tab_bar{
+  float:left;
+  width:420px;
+  height:30px;
+  background-color:#fff;
+  border-bottom: 1px solid #ddd;
+}
+#tab_mask{
+  width:200%;
+  height:100%;
+  float:left;
+  margin:0;
+  padding:0;
+  background-color: #ddd;
+}
+.tab_li{
+  width:25%;
+  float:left;
+  height:100%;
+  background-color: #ddd;
+    margin:0;
+  padding:0;
+    text-align:center;
+  padding-top:2px;
+}
+.tab_li_s{
+  width:25%;
+  float:left;
+  height:100%;
+  text-align:center;
+  padding-top:2px;
+    margin:0;
+  padding:0;
+  background-color: white;
+  border-radius: 15px 15px 0px 0px;
+  -moz-box-shadow: 0 1px 2px #b0b3b6;
+  -webkit-box-shadow: 0 1px 2px #b0b3b6;
+  box-shadow: 0 1px 2px #b0b3b6;
+}
+#feed_concise{
+  height:519px;
+  width:100%;
+  float:left;
+  background:#fff;
+  
+  margin:0px;
+  padding:0px;
+  overflow: hidden;
+  position:relative;
+}
+#fc_mask{
+  width:500%;
+  height:auto;
+  float:left;
+  margin:0px;
+  padding:0px;
+  position:absolute;
+  clear:both;
+  overflow: hidden;
+}
+.fc_li{
+  width:20%;
+  height:500px;
+  float:left;
+  margin:0px;
+  padding:0px;
+  position:relative;
+  overflow: hidden;
+
+}
+.mini_vertical_items{
+  width:100%;
+  height:auto;
+  position:absolute;
+  float:left;
+}
+#fc1_sub_mask{
+  width:100%;
+  height:auto;
+    margin:0px;
+  padding:0px;
+}
+#fc1_sub_mask{
+  @extend #fc1_sub_mask;
+}
+.fsm_li{
+  width:100%;
+  height:500px;
+    margin:0px;
+  padding:0px;
+}
+.location_name{
+  float:left;
+  margin-left:20px;
+  font-size:14pt;
+  color:#3366ee;
+}
+.location_nametree{
+  float:left;
+  margin-left:10px;
+  font-size:14px;
+  color:black;
+  padding-top:15px;
+}
+.location_wiki{
+  float:left;
+  font-size:12px;
+  color:black;
+  text-align:left;
+  padding:5px;
+}
+.location_edit{
+  float:right;
+  @include radius(5px);
+  background:white;
+  color:#3366ee;
+  display: block;
+  text-decoration:none;
+  margin-right:10px;
+}

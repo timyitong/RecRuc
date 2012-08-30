@@ -1,0 +1,47 @@
+<script>
+$(function(){
+	$('#new_location_dialog').dialog({
+		autoOpen:false,
+		modal:false,
+		buttons:{
+			"创建": function() {
+
+					$('#new_location').submit();
+					//document.write('shit');
+					$( this ).dialog( "close" );
+					
+				},
+			"取消": function() {
+					$( this ).dialog( "close" );
+				}
+		}
+	});
+
+	$('#new_location_button').click(function(){
+		$('#new_location_dialog').dialog('open');
+	});
+
+
+	location_pick_box('#new_location_lpb');
+
+
+
+});
+
+</script>
+<a class='add_new_location' id='new_location_button' href='javascript:void(0);'>新地点</a>
+<div id='new_location_dialog' title='创建新地点'>
+	<%=form_for(Location.new) do |f|%>
+	  <div class='field'>
+    		<div id='new_location_lpb' location_id='1'></div>
+	  </div>
+	  <div class="field">
+		    <%= f.label '地名' %><br/>
+		    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+		    <%= f.label :wiki %><br />
+		    <%= f.text_field :wiki %>
+	  </div>
+	<%end%>
+</div>

@@ -1,0 +1,10 @@
+
+<div class='comment_box'>
+<%= form_for(activity_comment,:remote=>true) do |f| %>
+    <%= f.number_field :activity_id,:value=>activity_id,:type=>:hidden%>
+    <%= f.number_field :to_user_id,:type=>:hidden%>
+    <%= f.text_area :content ,:class=>'activity_comment_feed_box'%>
+    <%= f.submit '发布',:class=>'activity_comment_feed_button'%>
+<% end %>
+</div>
+

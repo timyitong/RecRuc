@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RecRuc</title>
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" /> 
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" />
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+  <%= stylesheet_link_tag    "layout" %>
+  <%= stylesheet_link_tag    "users" %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "jquery-ui/custom-theme/jquery-ui-1.8.19.custom" %>
+  <%= stylesheet_link_tag "bubbletip/bubbletip.css" %>
+
+<%=stylesheet_link_tag 'tags'%>
+
+
+
+  <%= javascript_include_tag 'jquery'%>
+  <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
+<script src="http://106.187.92.216:8080/application.js" type="text/javascript" charset="utf-8">
+</script>
+  <%= javascript_include_tag 'jquery-ui'%>
+  <%= javascript_include_tag 'jquery_ujs'%>
+  <%= javascript_include_tag 'jquery.bubbletip'%>
+    <%= javascript_include_tag 'jquery.tools.min'%>
+  <%= javascript_include_tag 'jquery.sortElements'%>
+  <%= javascript_include_tag 'location_pick_box'%>
+
+
+<%=javascript_include_tag javascript_path('tags')%>
+
+
+
+
+  <%=javascript_include_tag 'follow_button'%>
+
+  
+  <%= javascript_include_tag 'header'%>
+
+  <script>
+   var __UID__="<%=session[:current_user_id]%>";
+  </script>
+</head>
+<body>
+<!--TOP THING-->
+<div id='top-for-pager'> 
+<div class='page-wrapper'>
+	<div id='top'>
+		<div class='logo'>
+		</div>
+		<a class='top_button' id='top_location' href='/home'>
+		  首页
+		</a>
+    <a class='top_button' id='top_location' href='/users/<%=session[:current_user_id]%>'>
+      个人主页
+    </a>
+    <a  class='top_button' id='top_location' href='/timemachine'>
+      时光机
+    </a>
+    <div id="xvk" class="xks xfr">
+        <div class="xis">
+            <input id='search_input' type="text" class="xhs" value="" placeholder="搜索标签、活动或人…">
+        </div>
+        <div class="xgs">搜索</div>
+    </div>
+	</div>
+</div>
+</div>
+
+<!--CONTENT THING-->
+<div id='content-for-pager'>
+<div id='content-for-pager-inner'>
+<div class='page-wrapper'>
+<div id='content'>
+<%= yield %>
+</div>
+</div>
+
+<!-- button thing-->
+
+<!-- 向上按钮-->
+<div style="position:fixed; left:84%; bottom:30px;" class='scroll_to_top'>
+  <a href="javascript:void(0);" id='backtop_button'>
+
+  </a>
+</div>
+<!-- 加号按钮-->
+<div style="position:fixed;left:84%;top:10px;z-index:10;opacity:0.9;" class="">
+  <a href="javascript:void(0)" id='plus_button' title='地图浏览模式'>
+  </a>
+</div>
+<div style="position:fixed;left:89%;top:10px;z-index:10;opacity:0.9;" class="">
+  <a href="javascript:void(0)" id='cur_location_tag'>
+    我在：<br/><%=session[:current_user_location]!=1 ? Location.find(session[:current_user_location]).nametree : '未选择'%>
+  </a>
+</div>
+<script>
+$(function(){
+    $("#map_edge").animate({left:-1000},0);
+    $("#info_box").animate({right:-1000},0);
+
+    $('#plus_button').toggle(function(){
+      $("#map_edge").animate({left:0},"slow");
+      $("#info_box").animate({right:126},"slow",function(){});
+      $(this).css('background-position',"50px 0px");
+    },function(){
+      $("#map_edge").animate({left:-1000},"slow");
+      $("#info_box").animate({right:-1000},"slow");
+      $(this).css('background-position',"0px 0px");
+    });
+});
+</script>
+  <%=render :partial=>'location_maps/show',:locals=>{:location_map=>LocationMap.where(["location_id=?",session[:current_user_location] ]).first   }%>
+<!--   -->
+</div>
+</div>
+</body>
+</html>

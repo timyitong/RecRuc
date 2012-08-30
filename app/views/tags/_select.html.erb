@@ -1,0 +1,8 @@
+<%= javascript_include_tag 'tag_select'%>
+<%=stylesheet_link_tag 'tag_select'%>
+<div class='tag_select'>
+	<a title='新建标签' class='add_new_tag' href='javascript:void(0);'></a><input id='tag_select_input' placeholder='搜索已存在标签'/>
+</div>
+<div class='tag_new_box'>
+	<%=render :partial=>'tags/form', :locals=>{:tag=>Tag.new}%>
+</div>

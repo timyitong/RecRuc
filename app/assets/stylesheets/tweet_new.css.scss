@@ -1,0 +1,64 @@
+@mixin r($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+
+@mixin fm{
+   font-family:"Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+}
+
+.tweet_new_main{
+	float:left;
+	width:500px;
+	@include r(5px);
+}
+#tweet_content{
+	display: block;
+	width:450px;
+	margin-left:20px;
+	margin-bottom:5px;
+	height:80px;
+	max-height:120px;
+
+	background-color: #fff;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .3),0 1px 3px rgba(0, 0, 0, .3) inset;
+	border: 1px solid #ddd;
+	outline:none;
+	padding:1px;
+	resize:none;
+	float:left;
+	@include fm;
+}
+.b{
+	display: block;
+	float:right;
+	margin-right:30px;
+	background:url('send_button.png') 70px 0px;
+	width:70px;
+	height:28px;
+	border:0;
+	cursor: pointer;
+}
+.b:hover{
+	@extend .b;
+	background-position:0px 0px;
+}
+.tweet_new_l{
+	float:left;
+}
+.tweet_new_a{
+	float:left;
+	margin-left:4%;
+}
+.tweet_new_img{
+	color:#333333;
+	font-weight:bolder;
+	float:left;
+	margin-left:4%;
+	width:90%;
+	text-align:left;
+}

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Point:</b>
+  <%= @location_map_point_img.point_id %>
+</p>
+
+<p>
+  <b>Imgurl:</b>
+  <%= @location_map_point_img.imgurl %>
+</p>
+
+
+<%= link_to 'Edit', edit_location_map_point_img_path(@location_map_point_img) %> |
+<%= link_to 'Back', location_map_point_imgs_path %>

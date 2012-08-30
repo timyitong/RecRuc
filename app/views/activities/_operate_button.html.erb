@@ -1,0 +1,5 @@
+
+<%
+ arr={'share'=>'分享','watch'=>'围观','in'=>'收藏'}
+%>
+<%=link_to arr[action_type]+"("+ActivityRef.where(:activity_id=>activity_id,:ref_name=>action_type).first.refnum.to_s+")",{:controller=>:activity_user_actions,:action=>:addAction,:action_type=>action_type,:note=>note,:activity_id=>activity_id},{:remote=>true,:id=>action_type+'_button',:class=>action_type+'_button_whole'}%>

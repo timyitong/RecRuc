@@ -1,0 +1,21 @@
+<h1>Listing activity_tweets</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activity_tweets.each do |activity_tweet| %>
+  <tr>
+    <td><%= link_to 'Show', activity_tweet %></td>
+    <td><%= link_to 'Edit', edit_activity_tweet_path(activity_tweet) %></td>
+    <td><%= link_to 'Destroy', activity_tweet, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Activity tweet', new_activity_tweet_path %>

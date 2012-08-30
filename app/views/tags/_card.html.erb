@@ -1,0 +1,40 @@
+
+<script>
+$(function(){
+	$("#tag_button_<%=tag.id%>").tooltip({
+	 
+	   // tweak the position
+	   offset: [10, 100],
+	   predelay: 200,
+	   relative:true,
+	 
+	   // use the "slide" effect
+	   effect: 'slide'
+	 
+	// add dynamic plugin with optional configuration for bottom edge
+	});
+});
+</script>
+<%=link_to tag.name, tag_path(tag),:class=>'tag_button',:id=>'tag_button_'+tag.id.to_s%>
+
+<div class='tooltip'>
+	
+	<%if tag.icon_file_name==nil%>
+	<div style="background-image:url('<%=image_path("no-image.gif")%>');" class='tags_icon'></div>
+	<%else%>
+	<div style="background-image:url('<%=tag.icon.url(:normal)%>');" class='tags_icon'></div>
+	<%end%>
+
+	<div class='tag_name'>
+ 			<%=tag.name %>
+ 	</div>
+ 	<br/>
+ 	<br/>
+ 	<div class='tag_refnum'>
+ 			引用数：<%=tag.refnum%>
+ 	</div>
+ 	<div style='margin-left:8%;padding-top:5px;width:84%;float:left;border-top: solid 1px #E9E9E9;'>
+    <%= link_to '修改', edit_tag_path(tag) ,:class=>'follow_button'%> 
+  	<%=render :partial=>'public/follow_button',:locals=>{:target=>'tag',:follow_id=>tag.id}%>
+	</div>
+</div>

@@ -1,0 +1,49 @@
+<%
+# encoding: utf-8
+%>
+<div class='l_ap_main'>
+<script>
+$(function() {
+		var availableTags = [];
+		var tagid="#"+"<%=inputid.to_s%>";
+		$(tagid).autocomplete({
+			source: __SITE__+"/locations/autopick",
+			select:function (event, ui){
+				$('input[tagid='+tagid+']').val(ui.item.id);
+				$('input[tagid='+tagid+']').attr('iname',ui.item.name);
+				//$(tagid).val('123');
+
+			},
+			focus: function(){
+				return false;
+			},
+			close: function(event, ui) {
+				$(tagid).val($('input[tagid='+tagid+']').attr('iname'));
+			}
+
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {  // Here defines the layout of autocomplete
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a style='cursor:pointer;'><span style='float:left;width:auto;'>" + item.name + "</span><br/></a><span style='float:left;margin-left:20px;font-size:10pt;'>"+ item.nametree+"</span>")
+				.appendTo( ul );
+		};
+});
+</script>
+<%# encoding: utf-8%>
+<%=stylesheet_link_tag 'locations_autopick'%>
+<div id='main'>
+<% if location_id!=0 && location_id!='0'
+	default=Location.find(location_id).name
+   else
+    default=''
+   end
+%>
+
+<div class='input_lap_wrapper'>
+	<input type='text' id='<%=inputid%>' value='<%=default%>' class='input_lap', placeholder='输入关键词'/>
+</div>
+
+<input type='hidden' name='location_id' tagid='#<%=inputid.to_s%>' value='<%=location_id%>'/>
+</div>
+
+</div>

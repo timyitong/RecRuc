@@ -1,0 +1,1557 @@
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+@mixin fm{
+   font-family:"Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+
+  /*font-family:'Helvetica Neue',Helvetica,Arial,Sans-serif;*/
+}
+@mixin border{
+position: relative;
+clear: left;
+background: white;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+$share: #ff9933;
+$watch: #ff3300;
+$in: #990000;
+$create:#3366cc;
+$namecolor:/*#26a2da*/#259;
+
+html{
+  -webkit-text-size-adjust:none;
+}
+#search_area
+{
+	
+}
+#backtop_button{
+  background:url('backtop.png');
+  height:50px;
+  width:50px;
+  display: block;
+}
+#backtop_button:hover{
+  @extend #backtop_button;
+  background:url('backtop-2.png');
+}
+#plus_button{
+  background:url('plus.png');
+  height:50px;
+  width:50px;
+  display: block;
+}
+#cur_location_tag{
+  background:#2796d8;
+  @include radius1(8px);
+  height:50px;
+  width:130px;
+  display: block;
+  text-decoration:none;
+  color:#ffffff;
+  padding-left:10px;
+  padding-right:10px;
+  font-size:12px;
+}
+#collection_main{
+  width:75%;
+  height:auto;
+  float:left;
+  background:#ffffff;
+}
+#collection_top{
+  width:75%;
+  height:auto;
+  float:left;
+  background:#ffffff;
+}
+
+.icon{
+  width:100px;
+  height:100px;
+  float:left;
+  display:block;
+  background-repeat:no-repeat;
+  margin:10px;
+  border:1px solid #ddd;
+  @include radius1(8px);
+}
+.icon_button{
+  width:100%;
+  height:20%;
+  margin-top:80%;
+  background:#1c1b1c;
+  /*filter:alpha(Opacity=90);-moz-opacity:0.5;opacity: 0.85;*/
+  
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, a, code, em, img, q, small, strong, dd, dl, dt, li, ol, ul, fieldset, form, label, table, tbody, tr, th, td, input
+{
+  margin:0;
+  padding:0;
+}
+body
+{
+@include fm;
+color: #444;
+font-size: 62.5%;
+background: white;
+ 
+
+}
+div {
+display: block;
+}
+#content
+{
+  width:100%;
+  height:auto;
+}
+/*TOP*/
+#top-for-pager{
+  background-color:#2796d8;
+}
+.page-wrapper{
+  width: 900px; /* fixed width */
+  margin: 0 auto; /* center */
+    height:auto;
+}
+#content-for-pager-inner{
+  background: url(big-fade.png) repeat-x -70% 0;
+  float:left;
+width:100%;
+}
+#content-for-pager{
+background: #F0F0F0 url(tile.gif) repeat -70% 0;
+float:left;
+width:100%;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+font-size: 100%;
+vertical-align: baseline;
+border: 0;
+outline: 0;
+background: transparent;
+}
+
+
+#top
+{
+ width:900px;
+ height:60px;
+ /*position:absolute; 
+ left:expression(body.scrollLeft+body.clientWidth-this.offsetWidth); 
+ top:expression(body.scrollTop); 
+ z-index:100;*/
+/*filter:alpha(Opacity=90);-moz-opacity:0.5;opacity: 0.85;*/
+ background-color:#2796d8;
+
+ 
+}
+.tag_name{
+  font-size:16px;
+  float:left;
+  height:auto;
+  margin-bottom:5px;
+  margin-top:15px;
+  width:auto;
+  text-align:left;
+  color:#259;
+}
+.logo
+{
+ width:100px;
+ float:left;
+height:100%;
+ background:url('logo.gif');
+ background-repeat:no-repeat;
+}
+.top_button
+{
+ float:left;
+ width:134px;
+ display: block;
+ font-family:arial;
+ text-align:center;
+ color:white;
+  padding-top:20px;
+ height:40px;
+ text-decoration:none;
+  font-family:"Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+}
+.top_button:hover
+{
+  @extend .top_button;
+  background-color: #ffffff;
+  color:rgb(0,131,209);
+}
+.top_location
+{
+ float:left;
+ width:10%;
+ font-family:arial;
+  text-align:center;
+ color:white;
+ padding-top:20px;
+ height:40px;
+}
+.top_map
+{
+ float:left;
+ width:10%;
+ font-family:arial;
+  text-align:center;
+ color:white;
+ padding-top:20px;
+ text-decoration:none;
+ height:42px;
+}
+.top_map:hover
+{
+ float:left;
+ width:10%;
+ font-family:arial;
+  text-align:center;
+ color:rgb(0,131,209);
+ padding-top:20px;
+ text-decoration:none;
+ background: white;
+  height:42px;
+}
+.top_search
+{
+ float:left;
+ width:20%;
+ font-family:arial;
+  text-align:center;
+ color:white;
+  padding-top:18px;
+ height:100%;
+}
+/*Input bar*/
+.inputarea
+{
+ width:500px;
+ height:100px;
+ margin-left:200px;
+}
+#publish_editor
+{
+ width:500px;
+ height:100px;
+}
+.postbutton
+{
+ width:100px;
+ height:30px;
+ margin-left:600px;
+ background-image:url('button1.png');
+}
+
+
+/*tweets showing box:*/
+#tweets_box
+{
+  border:#0033CC;
+}
+/*TIMELINE*/
+.LMB_input
+{
+ width:80%;
+ height:30px;
+ border: solid 1px black;
+}
+.LeaveMessageBox
+{
+ width:100%;
+ height:auto;
+ background: rgb(251,251,251);
+ border: solid 1px #ccc;
+ padding-top:3px;
+}
+.LMB_line
+{
+ width:100%;
+ height:auto;
+ margin-top:5px;
+ padding-left:5px;
+}
+.line2
+{
+  width:90%;
+height:1px;border:none;border-top:1px dashed #ccc;
+}
+.LMB_headpic
+{
+text-align:center;
+ width:40px;
+ height:40px;
+ float:left;
+}
+.LMB_words
+{
+ width:80%;
+ height:auto;
+ float:left;
+}
+.reply
+{
+ width:460px;
+ float:left;
+ padding-left:440px;
+ height:20px;
+ color:rgb(154,187,200);
+ margin-top:0px;
+ padding-top:0px;
+ text-decoration:none;
+}
+.reply:hover
+{
+ width:460px;
+ float:left;
+ padding-left:440px;
+ height:20px;
+ color:rgb(154,187,200);
+  margin-top:0px;
+ padding-top:0px;
+ text-decoration:underline;
+}
+
+/*for tweet*/
+.head_pic
+{
+ width:50px;
+ height:50px;
+ float:left;
+}
+.textstyle
+{
+ font-size:12px;
+ text-align:left;
+}
+.tweets_line
+{
+ width:80%;
+ margin-left:10%;
+ margin-right:10%;
+ height:auto;
+}
+.tweets_line hr 
+{ 
+  width:100%;
+}
+
+/*main box*/
+#main_box
+{
+  width:70%;
+  height:auto;
+  border:1px solid rgb(204,204,204);
+  margin-left:15%;
+  margin-top:60px;
+}
+.box_top
+{
+  width:100%;
+  height:20px;
+  float:left;
+  background:rgb(0,131,209);
+}
+.box_button
+{
+  float:left;
+  width:100px;
+  height:100%;
+  background:rgb(0,131,209);
+  font-family:arial;
+  color:white;
+}
+.box_button:hover
+{
+  float:left;
+  width:100px;
+  height:100%;
+  background:white;
+  color:rgb(0,131,209);
+}
+
+
+
+
+
+/*for FEED BOX*/
+.feed_main{
+  width:100%;
+  height:auto;
+  float:left;
+ /* border-bottom:1px solid #d9dce2;*/
+ @include border;
+ margin-bottom:10px;
+  font-size:14px;
+  background-color:#fff;
+}
+.feed_main_d{
+position: relative;
+width: 205px;
+float: left;
+padding: 0;
+margin: 0 20px 30px 0;
+}
+.feed_c_d{
+  position: relative;
+clear: left;
+background: white;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+float:left;
+padding:10px;
+}
+.f_c_text{
+  position: absolute;
+  cursor: pointer;
+  opacity:0;
+  top: 10px;
+left: 10px;
+width: 160px;
+height: 130px;
+margin: 0;
+padding: 10px;
+font-size: 12px;
+line-height: 2;
+text-decoration: none;
+color: #888;
+background: white;
+background: rgba(255, 255, 255, 0.95);
+overflow: hidden;
+}
+.tools{
+  width:100%;
+  float:left;
+}
+ul.tools li {
+float: right;
+width: auto;
+margin: 0 0 0 12px;
+display: inline;
+font-size: 11px;
+line-height: 1;
+color: #AAA;
+text-align: left;
+}
+li.comment a{
+  padding-left: 15px;
+background: url(icon-comments.png) no-repeat 0 0;
+display:block;
+text-decoration:none;
+color: #AAA;
+}
+li.comment a:hover{
+background-position:0 -15px;
+}
+li.collect a{
+  padding-left: 15px;
+background: url(icon-hearts.gif) no-repeat 0 0;
+display:block;
+text-decoration:none;
+color: #AAA;
+}
+li.collect a:hover{
+   
+background-position:0 -17px;
+}
+.f_c_over{
+    position: absolute;
+  cursor: pointer;
+  top: 10px;
+left: 10px;
+width: 160px;
+height: 130px;
+margin: 0;
+padding: 10px;
+font-size: 12px;
+line-height: 2;
+text-decoration: none;
+color: #888;
+background: white;
+background: rgba(255, 255, 255, 0.95);
+overflow: hidden;
+}
+.feed_c_img{
+  width: 185px;
+height: 150px;
+overflow: hidden;
+strong a{
+  display: block;
+margin: 0 0 4px 0;
+font-weight: bold;
+font-size: 14px;
+line-height: 1.2;
+color: #444;
+text-decoration:none;
+}
+}
+h2{
+  max-height: 16px;
+margin: 10px 0 0 0;
+padding: 0 0 0 10px;
+width:100%;
+float:left;
+font-size: 13px;
+font-weight: normal;
+line-height: 1.4em;
+color: #999;
+vertical-align: middle;
+ img{
+  float: left;
+width: 16px;
+max-height: 16px;
+margin: 0 5px 0 0;
+vertical-align: middle;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+ }
+ a {
+text-decoration: none;
+float:left;
+}
+ a:visited, a:link{
+  color: #4083A9;
+outline: none;
+ }
+}
+.tools{
+  margin: 10px 0 0 0;
+text-align: left;
+}
+.feed_avatar{
+  float:left;
+  margin-top:12px;
+  margin-left:12px;
+  @include radius1(5px);
+
+}
+.avatar{
+  display: block;
+  width:64px;
+  height:64px; 
+  @include radius1(5px);
+  background:no-repeat;
+  float:left;
+}
+.avatar_wrapper{
+  margin-left:20px;
+  margin-top:20px;
+}
+.feed_tri{
+  background-image:url('feed_tri.png');
+  background-repeat:no-repeat;
+  width:14px;
+  height:20px;
+  float:right;
+  margin-top:30px;
+  z-index:5;
+}
+.feed_c_main{
+  width:100%;
+  float:right;
+  @include border;
+}
+.feed_c_intro{
+  text-align:left;
+  padding:10px;
+}
+.feed_content{
+  width:560px;
+  margin-top:12px;
+  height:auto;
+  float:left;
+}
+.feed_c_title{
+  width:100%;
+  font-size:20px;
+  text-align:left;
+  a{
+      text-decoration:none;
+      
+      color: $namecolor;
+  }
+}
+.feed_c_operate{
+  
+}
+.feed_c_tag{
+  float:left;
+  width:auto;
+  height:auto;
+  text-align:left;
+  margin-top:5px;
+}
+.tag_button{
+  display: block;
+  font-size:13px;
+  background:#e1f0f7;
+  text-decoration:none;
+  width:auto;
+  height:auto;
+  float:left;
+  color:#225599;
+margin: 0 5px 5px 0;
+  padding:3px;
+  @include radius1(30px);
+  padding: 0 10px;
+}
+.tag_button:hover{
+  @extend .tag_button;
+  color:#ffffff;
+  background-color: #225599;
+}
+.tag_h{
+  float:left;
+}
+.f_c_line{
+  float:left;
+  width:100%;
+  height:auto;
+  margin-left:10px;
+  margin-right:10px;
+  text-align:left;
+}
+.f_c_content{
+    float:left;
+  width:100%;
+  height:auto;
+  margin-left:10px;
+  margin-right:10px;
+  text-align:left;
+}
+.f_c_name{
+  float:left;
+  font-size:14px;
+  color:$namecolor;
+  text-decoration:none;
+}
+@mixin fcat{
+  float:left;
+  height:20px;
+  width:30px;
+  color:white;
+  font-size:14px;
+  @include radius1(5px);
+}
+.f_c_at_share{
+  @include fcat;
+  background-color: $share;
+}
+.f_c_at_watch{
+  @include fcat;
+  background-color: $watch;
+}
+.f_c_at_in{
+  @include fcat;
+  background-color: $in;
+}
+.f_c_at_create{
+ @include fcat;
+  background-color: $create;
+}
+.f_c_location{
+  float:left;
+  a{
+    text-decoration:none;
+    color:$namecolor;
+    margin-right:15px;
+  }
+}
+.f_c_time{
+  float:left;
+  width:100%;
+  text-align:left;
+  margin-right:15px;
+}
+
+
+/*for FEED COMMENT BOX*/
+.comment_box{
+  width:100%;
+  height:auto;
+  float:left;
+}
+.activity_comment_feed_box{
+  width:400px;
+  height:38px;
+  border: 1px solid #ddd;
+  outline:none;
+  padding:1px;
+  resize:none;
+  @include radius1(5px);
+  float:left;
+  margin-left:12px;
+  margin-top:12px;
+  margin-bottom:12px;
+
+}
+.activity_comment_feed_button{
+  @include radius1(5px);
+  height:39px;
+  width:60px;
+  color:#8e8e8e;
+  margin-left:10px;
+  float:left;
+  cursor:pointer;
+  margin-top:12px;
+}
+.activity_comment_main{
+  width:100%;
+  background:#f3f3f3;
+  float:left;
+  margin-top:10px;
+}
+.ac_line{
+  width:100%;
+  height:auto;
+  float:left;
+  margin-left:10px;
+  margin-bottom:15px;
+  border-bottom: 1px solid #DDD;
+  font-size: 1em;
+line-height: 1.4em;
+padding-bottom:15px;
+}
+.ac_content{
+  float: left;
+  color:black;
+  font-size:12px;
+}
+.user_name{
+  float: left;
+  color:$namecolor;
+  text-decoration:none;
+}
+.ac_user_name{
+  text-decoration: none;
+color: #205F82;
+float:left;
+font-size:13px;
+}
+.avatar_mini{
+  float: left;
+  margin-left:5px;
+  margin-right:10px;
+  width:30px;
+  height:30px;
+  @include radius1(5px);
+}
+.comment_reply{
+  float:right;
+  color:$namecolor;
+  text-decoration:none;
+  margin-right:12px;
+}
+.head_col{
+  float:left;
+  width:30px;
+  height:100%;
+  margin-right:9px;
+}
+.mini_content{
+  float:left;
+  height:auto;
+  width:85%;
+}
+
+.mini_feed{
+  width:100%;
+  height:auto;
+  float:left;
+  font-size:14px;
+  @include radius1(5px);
+  background-color:#ffffff;
+  text-align:left;
+  p{
+    float:left;
+    padding:0px;
+    margin:0px;
+  }
+  padding-top:5px;
+  padding-bottom:5px;
+}
+.mini_feed:hover{
+  background-color:#ffffff;
+}
+.mini_feed_d{
+  @extend .mini_feed;
+  width:50%;
+}
+.mini_feed_sub{
+  margin-left:10%;
+  margin-right:1%;
+  width:87%;
+  float:left;
+  height:auto;
+  background:#f3f3f3;
+  border:1px solid #e6e6e6;
+  margin-top:5px;
+}
+.arrow *{
+font-family: "SimSun";
+overflow: hidden;
+font-size: 21px;
+display: block;
+height: 10px;
+margin-top:-25px;
+}
+.arrow span{
+margin-top:-8px;
+margin-left:4px;
+color: #f3f3f3;
+font-size:21px;
+}
+.arrow em{
+margin-top:-10px;
+color: #E6E6E6;
+font-size:21px;
+}
+.mini_op_line{
+  width:100%;
+  height:auto;
+  float:left;
+}
+.mini_rt{
+  float:right;
+  text-decoration:none;
+  color:#26a2da;
+}
+.mini_ct{
+  @extend .mini_rt;
+}
+.mini_opb{
+  text-decoration:none;
+  color:#26a2da;
+}
+.mini_c_time{
+    text-decoration:none;
+  color:#26a2da;
+  float:left;
+}
+.b_mini{
+  float:left;
+}
+
+
+/*follow BUTTON*/
+
+.follow_button{
+  @include radius1(2px);
+  cursor: pointer;
+  width:auto;
+  float:right;
+  color:#ffffff;
+  background:url('attention.png') 0px -24px;
+  line-height: 22px;
+_line-height: 23px;
+margin-right:10px;
+padding: 0 10px 0 5px;
+font-size:12px; 
+}
+.follow_button_cancel{
+  @include radius1(2px);
+  cursor: pointer;
+  border:1px solid #dddddd;
+  width:auto;
+  float:right;
+  margin-right:10px;
+  color:#73797c;
+  background:#f8f8f8;
+  line-height: 22px;
+_line-height: 23px;
+padding: 0 10px 0 5px;
+font-size:12px;
+}
+
+/*SHARE WATCH IN Comments buttons*/
+.comment_button{
+  float:right;
+  text-decoration:none;
+  color:$namecolor;
+  padding-top:3px;
+  margin-right:10px;
+}
+@mixin button_common{
+  float:right;
+  margin:5px;
+  width:60px;
+  height:40px;
+  @include radius1(5px);
+}
+@mixin num_common{
+  color:white;
+  font-size:12pt;
+
+}
+.share_button_whole{
+
+  background-color:$share;
+  @include button_common;
+   @extend .share_button;
+}
+.share_button_head{
+  @include num_common;
+
+}
+
+.share_button{
+  height:40px;
+  color:white;
+  display: block;
+  text-decoration:none;
+  font-size:10pt;
+  text-align:center;
+}
+.share_button:hover{
+  @extend .share_button;
+  background-color:#ffffff;
+  color:black;
+}
+
+.watch_button_whole{
+   @extend .share_button;
+    background-color:$watch;
+   @include button_common;
+
+}
+.watch_button_head{
+  @include num_common;
+}
+.watch_button{
+  @extend .share_button;
+}
+.watch_button:hover{
+  @extend .watch_button;
+    background-color:#ffffff;
+      color:black;
+}
+.in_button_whole{
+  color:$namecolor;
+  float:right;
+  width:auto;
+  height:auto;
+  margin-right:10px;
+  margin-top:3px;
+  text-decoration:none;
+
+}
+.in_button_whole:hover{
+  @extend .in_button_whole;
+  color:#000000;
+  background:#ffffff;
+}
+.in_button_head{
+  @include num_common;
+}
+.in_button{
+  @extend .share_button;
+}
+.in_button:hover{
+  @extend .in_button;
+    background-color:#ffffff;
+      color:black;
+}
+
+/*location_pick_box*/
+@mixin url_font{
+  font-size:10pt;
+  color:$lpb_color;
+  text-decoration:bold;
+}
+$lpb_color:#259;
+
+
+.lpb_main{
+  width:100%;
+  height:auto;
+  
+  float:left;
+  z-index:15px;
+  margin-top:10px;
+  background:#fff;
+  border:1px solid #D9DCE2;
+  padding-top:5px;
+}
+.location_pick_box{
+  width:auto;
+  height:auto;
+  float:left;
+  text-align:left;
+}
+.lpb_title{
+  width:auto;
+  float:left;
+  cursor:pointer
+}
+.lpb_url_head{
+  width:40px;
+  height:auto;
+  float:left;
+  margin-left:10px;
+  @include url_font;
+}
+.lpb_url_item{
+  float:left;
+  text-decoration:none;
+ @include url_font;
+
+}
+
+.lpb_url_tear{
+    float:left;
+  @include url_font;
+}
+.lpb_url_arrow{
+  width:10px;
+  height:8px;
+  float:left;
+  background:url('arrow/arrow1.gif');
+  margin-top:6px;
+  margin-right:2px;
+  margin-left:2px;
+}
+.lpb_child_item{
+  display: block;
+  width:50%;
+  float:left;
+  text-align:center;
+  text-decoration:none;
+  color:$lpb_color;
+  background-color: #E1F0F7;
+}
+.lpb_child_none{
+ display: block;
+  width:50%;
+  float:left;
+  text-align:center;
+  text-decoration:none;
+  color:$lpb_color;
+  background-color: #ffffff;
+}
+.lpb_child_item:hover{
+    @extend .lpb_child_item;
+   @include radius1(10px);
+    color:white;
+    background-color: $lpb_color;
+}
+
+.fct_line{
+  width:100%;
+  float:left;
+  height:30px;
+  @include radius1(5px);
+
+  text-decoration:none;
+  display: block;
+  font-size:12pt;
+  margin-left:10px;
+  margin-right:10px;
+  padding-top:3px;
+
+    background:#ffffff;
+  color:#3366dd;
+}
+.fct_line:hover{
+  @extend .fct_line;
+ color:white;
+   background-color: #3366dd;
+}
+.fct_title{
+  display: block;
+  float:right;
+  font-size:14px;
+  color:$namecolor;
+  text-decoration:none;
+}
+.fct_time{
+  float:right;
+  font-size:10pt;
+}
+#top_add{
+  width:134px;
+  height:auto;
+  float:left;
+}
+
+.wrapper{
+  width:100%;
+  height:100%;
+  overflow: hidden;
+}
+.mask{
+  width:200%;
+  height:100%;
+}
+.box{ 
+  width:50%; 
+  height:100%; 
+  float:left; 
+  margin:0;
+}
+
+ul{list-style-type:none;padding:0px;}
+li{list-style-type:none;margin:0px;}
+
+.feed_tweet_rt{
+  background-color: #f3f3f3;
+  float:left;
+  width:100%;
+  margin-left:10px;
+  margin-right:10px;
+  border:1px solid #e6e6e6;
+  text-align:left;
+  font-size:12px;
+  color:#777;
+  .ope{
+    margin-left:10px;
+    margin-right:10px;
+    float:left;
+    width:550px;
+  }
+  p{
+    margin:10px;
+  }
+}
+  .picbox{
+    width:100%;
+    height:auto;
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:15px;
+    margin-bottom:15px;
+    float:left;
+    text-align:left;
+    cursor:url('large.cur'),auto;
+
+  }
+.namecard{
+  color:$namecolor;
+  text-decoration:none;
+}
+.tweet_back{
+  display: block;
+  height:100%;
+  width:auto;
+  color:$namecolor;
+  cursor: pointer;
+  float:right;
+  margin-right:10px;
+}
+.input_lap{
+  display: block;
+  border:none;
+  border-style:none;
+  outline-color:#ddd;
+  background:none;
+  margin-left:50px;
+  width:148px;
+  height:23px;
+  color:#333333;
+  margin-top:1px;
+  margin-right:1px;
+  @include fm;
+}
+  .input_lap:focus{
+    border:none;
+    border-style:none;
+  }
+.input_lap_wrapper{
+  width:200px;
+  height:25px;
+  background:url('input_l.gif');
+  float:left;
+}
+.input_aap{
+  display: block;
+  border:none;
+  border-style:none;
+  outline-color:#ddd;
+  background:none;
+  margin-left:50px;
+  width:199px;
+  height:23px;
+  color:#333333;
+  margin-top:1px;
+  margin-right:1px;
+  @include fm;
+}
+.input_aap_wrapper{
+  width:250px;
+  height:25px;
+  background:url('input_a.gif');
+  float:left;
+}
+
+.file{
+  position: relative;
+  float:left;
+  margin-left:4%;
+  cursor: pointer;
+}
+.file_wrapper{
+  opacity:0;
+  cursor:pointer;
+  position:absolute;
+  top:0;
+  z-index:2;
+}
+.file_button{
+    background-color: #ccc;
+    border: none;
+    color: #666;
+    padding: 3px 5px;
+    border-radius: 5px;
+    position: relative;
+    top: 0;
+    z-index: 1;
+    width:70px;
+    height:20px;
+    cursor: pointer;
+}
+.input_img{
+  width:60px;
+  height:20px;
+  float:left;
+  margin-left:3px;
+  margin-top:2px;
+  cursor: pointer;
+}
+.tweet_share_button{
+
+  text-decoration:none;
+  color:$namecolor;
+  float:right;
+}
+.tweet_comment_button{
+
+  @extend .tweet_share_button;
+}
+.rt_button{
+  @extend .tweet_share_button;
+}
+.rt_c_button{
+    @extend .tweet_share_button;
+}
+.time{
+    text-decoration:none;
+  color:$namecolor;
+  float:left;
+}
+.retweet_box{
+  width:auto;
+  height:auto;
+  margin-top:15px;
+  float:left;
+  margin-left:85px;
+  margin-right:80px;
+}
+.tip{
+  background:#ffffff;
+  width:auto;
+  height:auto;
+  z-index:999;
+  display: none;
+}
+.map_tip{
+  background:#ffffff;
+  width:auto;
+  height:auto;
+  z-index:999;
+  display: none;
+}
+
+.location_mini_show{
+float:left;
+width:100%;
+height:auto;
+}
+
+.at_here_button{
+    @include radius1(2px);
+  cursor: pointer;
+  width:auto;
+  float:right;
+  margin-right:10px;
+  color:#ffffff;
+  background:url('attention.png') 0px -24px;
+  line-height: 22px;
+_line-height: 23px;
+padding: 0 10px 0 5px;
+font-size:12px; 
+text-decoration:none;
+}
+
+.xks {
+background: transparent url("search-bar1.png") scroll no-repeat 0 1px;
+margin: 15px 0 0 0;
+position: relative;
+height: 36px;
+min-width: 360px;
+float: left;
+}
+.xgs {
+background: transparent url("search-btns.png") no-repeat scroll 0 0;
+color: #EFF7FA!important;
+right: -3px;
+top: 1px;
+font-size: 13px;
+height: 34px;
+text-align: center;
+line-height: 34px;
+width: 80px;
+text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+cursor: pointer;
+float:left;
+}
+.xis {
+padding: 10px 0 0 10px;
+line-height: 14px;
+float:left;
+}
+.xhs {
+color: #999;
+line-height: 14px;
+background: none repeat scroll 0 0 #EEF8FF;
+border: 0 none;
+font-size: 14px;
+outline: medium none;
+overflow: hidden;
+width: 270px;
+float:left;
+}
+.xhr {
+position: absolute;
+top: 11px;
+height: 22px;
+left: 10px;
+color: #999;
+cursor: text;
+}
+.name_tag{
+  float:left;
+  color:$namecolor;
+  margin-left:10px;
+  margin-top:10px;
+}
+.num_bar{
+  float:left;
+  width:100%;
+  margin-left:10px;
+  margin-top:10px;
+}
+.num_item{
+float:left;
+height:auto;
+width:40px;
+font-size:12px;
+ text-align:center;
+}
+.num_head{
+ float:left;
+ font-weight:bold;
+ color:$namecolor;
+ font-size:14px;
+
+ width:100%;
+}
+.num_tag{
+ float:left;
+ width:100%;
+ color:#666666;
+}
+.namecard{
+  float:left;
+  text-decoration:none;
+  color:$namecolor;
+  width:auto;
+  display: block;
+}
+#s_time{
+    @include radius1(5px);
+width: 80px;
+margin-right:10px;
+margin-top:3px;
+box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+border: 1px solid #888;
+color: #888;
+outline: none;
+float: left;
+height: 20px;
+}
+#e_time{
+  @extend #s_time;
+}
+#time_top{
+  width:70%;
+  height:auto;
+  float:left;
+}
+#time_content{
+  width:70%;
+  height:auto;
+  float:left;
+}
+.normal_button{
+    background:#26a2da;
+  text-decoration:none;
+  color:white;
+  width:80px;
+  height:30px;
+  @include radius1(5px);
+  margin-bottom:15px;
+  display: block;
+  padding:5px;
+  float:left;
+  padding-top:15px;
+  margin:15px;
+  text-align:center;
+}
+.normal_button:hover{
+   color:#26a2da;
+   background:#ffffff;
+}
+
+.tooltip {
+ background:url('black_arrow.png');
+  
+  /* background:url('white.png');*/
+  display:none;
+    font-size: 13px;
+    height:160px;
+    width:290px;
+    color:#999;
+    z-index:90;
+}
+.tooltip.bottom {
+  background:url('black_arrow_bottom.png');
+  padding-top:40px;
+  height:55px;
+}
+ 
+.tooltip.bottom {
+  background:url('black_arrow_bottom.png');
+}
+
+
+/*
+root element for the scrollable.  when scrolling occurs this
+element stays still.
+*/
+.scrollable {
+  /* required settings */
+  position:relative;
+  overflow:hidden;
+  width: 660px;
+  height:90px;
+}
+ 
+/*
+root element for scrollable items. Must be absolutely positioned
+and it should have a extremely large width to accommodate scrollable
+items.  it's enough that you set width and height for the root element
+and not for this element.
+*/
+.scrollable .items {
+  /* this cannot be too large */
+  width:20000em;
+  position:absolute;
+}
+ 
+/*
+a single item. must be floated in horizontal scrolling.  typically,
+this element is the one that *you* will style the most.
+*/
+.items div {
+  float:left;
+}
+.prev{
+ background:url('left.png') 0 0;
+ display: block;
+ width:18px;
+ height:18px;
+ float:left;
+ margin-top:10px;
+ margin-left:20px;
+ cursor: pointer;
+}
+.prev:hover{
+  background-position:0 -18px;
+}
+.next{
+background:url('right.png') 0 0;
+ display: block;
+ width:18px;
+ height:18px;
+ float:right;
+  margin-top:10px;
+ margin-right:20px;
+ cursor: pointer;
+}
+.next:hover{
+  background-position:0 -18px;
+}
+#mini_navi{
+  float:left;
+  width:320px;
+  padding:0px;
+  margin:0px;
+  text-align:center;
+  li{
+    float:left;
+    width:auto;
+    margin:8px 10px 0 10px;
+    color:#ddd;
+    padding:0px 5px 0px 5px;
+  }
+  li:hover{
+    color:black;
+    cursor: pointer;
+    border-top:1px solid #ddd;
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-bottom:1px solid #fff;
+
+    -moz-border-radius: 5px 5px 0 0;
+  border-top-right-radius:5px;
+  border-top-left-radius:5px;
+  border-bottom-right-radius:0px;
+  border-bottom-left-radius:0px;
+　　border-radius: 5px 5px 0 0;
+  }
+  .active{
+ color:black;
+     border-top:1px solid #ddd;
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-bottom:1px solid #fff;
+
+      -moz-border-radius: 5px 5px 0 0;
+  border-top-right-radius:5px;
+  border-top-left-radius:5px;
+  border-bottom-right-radius:0px;
+  border-bottom-left-radius:0px;
+　　border-radius: 5px 5px 0 0;
+  }
+}

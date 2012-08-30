@@ -1,0 +1,6 @@
+<script>
+$(function(){
+});
+</script>
+<%=image_tag @location_map.map.url(:normal),:lid=>@location_map.location_id,:up_lid=>LocationHaveLocation.where(["child_id=?",@location_map.location_id]).first.location_id,:class=>'map_img'%>
+

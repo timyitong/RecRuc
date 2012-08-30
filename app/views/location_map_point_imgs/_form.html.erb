@@ -1,0 +1,25 @@
+<%= form_for(@location_map_point_img) do |f| %>
+  <% if @location_map_point_img.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location_map_point_img.errors.count, "error") %> prohibited this location_map_point_img from being saved:</h2>
+
+      <ul>
+      <% @location_map_point_img.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :point_id %><br />
+    <%= f.number_field :point_id %>
+  </div>
+  <div class="field">
+    <%= f.label :imgurl %><br />
+    <%= f.text_field :imgurl %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

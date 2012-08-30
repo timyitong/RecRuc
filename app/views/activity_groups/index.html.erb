@@ -1,0 +1,21 @@
+<h1>Listing activity_groups</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activity_groups.each do |activity_group| %>
+  <tr>
+    <td><%= link_to 'Show', activity_group %></td>
+    <td><%= link_to 'Edit', edit_activity_group_path(activity_group) %></td>
+    <td><%= link_to 'Destroy', activity_group, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Activity group', new_activity_group_path %>

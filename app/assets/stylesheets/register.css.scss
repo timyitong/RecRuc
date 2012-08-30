@@ -1,0 +1,88 @@
+@mixin best_input($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+body{
+	 font-family:"Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+}
+input{
+	@include best_input(5px);
+	height:40px;
+	width:260px;
+	background-color: #faffbd;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .3),0 1px 3px rgba(0, 0, 0, .3) inset;
+	border: 1px solid #0D7BD5;
+	color: #888;
+	outline:none;
+	float:left;
+}
+.b{
+	background: #1E95E5;
+	color: #B7D4EC;
+	color: rgba(255, 255, 255, .7);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, .05),0 1px 0 rgba(255, 255, 255, .15) inset;
+	border: 1px solid #147DCD;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	line-height: 18px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+	padding: 6px 15px;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 5px;
+	float: left;
+
+	height:40px;
+	width:60px;
+	margin-left:215px;
+	margin-top:40px;
+}
+.b:active {
+background: #1D8FDB;
+box-shadow: 0 1px 0 rgba(255, 255, 255, .15);
+}
+#f{
+	float:left;
+	width:320px;
+	height:auto;
+}
+#note{
+	height:20px;
+	width:100%;
+	float:left;
+	color:#0d78D5;
+}
+#main{
+	width:330px;
+	height:auto;
+	background-color:#ffffff;
+	float:left;
+	@include best_input(5px);
+	text-align:center;
+	margin-left:30%;
+}
+#main_header{
+	width:100%;
+	height:20px;
+	background-color: #0d78D5;
+}
+.t{
+   width:40px;
+   height:auto;
+   float:left;
+   padding-top:10px;
+}
+.field{
+	width:300px;
+	height:40px;
+	float:left;
+	margin:15px;
+}
+body{
+
+}

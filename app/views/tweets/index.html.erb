@@ -1,0 +1,49 @@
+<h1>Listing tweets</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Location</th>
+    <th>Content</th>
+    <th>Imgurl</th>
+    <th>Retweets</th>
+    <th>Comments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<script>
+$(document).ready(function (){
+	$('.retweets').hide();
+	$('.retweet_button').click(function (){
+		var tid=$(this).attr('tid');
+	$('#retweets'+tid).show();
+  });
+
+});
+</script>
+<% @tweets.each do |tweet| %>
+  <tr id='tweet_line<%=tweet.id%>'>
+    <td><%= tweet.user_id %></td>
+    <td><%= tweet.location_id %></td>
+    <td><%= tweet.content %></td> 
+    <td><%= tweet.retweetsnum %></td>
+    <td><%= tweet.commentsnum %></td>
+    <td><a href='javascript:void(0);' class='retweet_button' tid='<%=tweet.id%>'>Retweet</a></td>
+    <td><%= link_to 'Show', tweet %></td>
+    <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+    <td><%= link_to 'Destroy', tweet, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+  <div class='retweets' id='retweets<%=tweet.id%>'>
+  	<%=form_for(Tweet.new) do |f|%>
+    	<%= f.text_field :content,:value=>'//'%>
+    	<%= f.hidden_field :retweet_id,:value=>tweet.id%>
+    	<%= f.submit 'retweet'%>
+  	<%end%>
+  </div>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tweet', new_tweet_path %>

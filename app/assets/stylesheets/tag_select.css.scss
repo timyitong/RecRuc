@@ -1,0 +1,132 @@
+/*TAG TAG!*/
+
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+@mixin inp{
+  @include radius1(5px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .3),0 1px 3px rgba(0, 0, 0, .3) inset;
+  border: 1px solid #888;
+  color: #888;
+  outline:none;
+  float:left;
+}
+.tag_select{
+  width:400px;
+  height:25px;
+  margin-top:10px;
+  float:left;
+  background-color: #ffffff;
+
+  input{
+    border:none;
+    width:360px;
+    height:23px;
+    float:left;
+    @include inp;
+  }
+  .tag_post{
+    float:left;
+    width:auto;
+    height:21px;
+    display: block;
+    font-size:8pt;
+    background-color: #e0eaf1;
+    border-bottom:1px solid #82a1b8;
+    border-right:1px solid #82a1b8;
+    margin-left:3px;
+    margin-top:1px;
+    margin-bottom:1px;
+    margin-right:3px;
+    color:#7999b0;
+    padding-left:8px;
+    padding-right:8px;
+    float:left;
+  }
+  .tag_post_close{
+    width:14px;
+    height:14px;
+    display: block;
+    background:url('tag_close_2.png') no-repeat;
+    float:right;
+    cursor: pointer;
+
+  }
+    .tag_post_close:hover{
+    width:14px;
+    height:14px;
+    display: block;
+    background:url('tag_close_1.png') no-repeat;
+    float:right;
+    cursor:pointer;
+
+  }
+
+}
+
+  .add_new_tag{
+    width:25px;
+    height:25px;
+    background:url('add.gif');
+    float:left;
+    display: block;
+  }
+  .add_new_tag:hover{
+    width:25px;
+    height:25px;
+    background:url('add-2.gif');
+    float:left;
+    display: block;
+
+  }
+
+.tag_new_box{
+  width:auto;
+  height:auto;
+  background:#ffffff;
+  position:relative;
+  left:320px;
+  top:10px;
+  float:left;
+  padding:8px;
+  @include radius1(5px);
+  border:1px solid #ddd;
+}
+#nt_create{
+  display: block;
+  float:left;
+  @include radius1(5px);
+  font-size:10pt;
+  background:white;
+  color:black;
+  border:1px solid black;
+  text-decoration:none;
+  width:30px;
+  padding:1px;
+  margin:2px;
+}
+#nt_create:hover{
+  @extend #nt_create;
+  background-color: black;
+  color: #fff;
+}
+#nt_cancel{
+  @extend #nt_create;
+}
+#nt_cancel:hover{
+  @extend #nt_cancel;
+  background-color: black;
+  color: #fff;
+}
+#nt_text{
+  width:100px;
+  height:20px;
+    display: block;
+     float:left;
+  @include inp;
+}

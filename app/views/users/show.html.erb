@@ -1,0 +1,53 @@
+<%=stylesheet_link_tag 'users'%>
+<%=javascript_include_tag javascript_path('users')%>
+<div class='profile'>
+
+	<%if @user.avatar_file_name!=nil%>
+	<div class='icon' style="background:url('<%=@user.avatar.url(:thumb)%>');" ></div>
+	<%else%>
+	<div class='icon' style="background:url('<%=image_path("no-image.gif")%>');" ></div>
+	<%end%>
+
+	<div class='profile_right'>
+		<div class='profile_line'>
+		  <strong class="for_name"><%= @user.name %></strong>
+		</div>
+
+		<div class='profile_line'>
+		<p><strong>Email:</strong><%= @user.email %></p>
+		</div>
+
+		<div class='profile_line'>
+		<p><strong>性别:</strong><%= @user.gender %>
+			<%if @user.id==session[:current_user_id]%>
+			<%=link_to '修改', edit_user_path(@user), :class=>'edit_user_button'%></p>
+			<%else%>
+			<%=render :partial=>'public/follow_button',:locals=>{:target=>'user',:follow_id=>@user.id}%>
+			<%end%>
+		</div>
+		<div class='profile_line'>
+
+		</div>
+	</div>
+</div>
+<div class='profile_operate'>
+	<div class='profile_o_button' action_type='comment' uid='<%=@user.id%>'>
+		留言
+	</div>
+	<div class='profile_o_button' action_type='share' uid='<%=@user.id%>'>
+		分享
+	</div>
+	<div class='profile_o_button' action_type='watch' uid='<%=@user.id%>'>
+		围观
+	</div>
+	<div class='profile_o_button' action_type='in' uid='<%=@user.id%>'>
+		参与
+	</div>
+	<div class='profile_o_button' action_type='create' uid='<%=@user.id%>'>
+		发起
+	</div>
+</div>
+<div id="user_feed_box">
+</div>
+
+

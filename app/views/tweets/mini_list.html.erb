@@ -1,0 +1,84 @@
+
+<script>
+$(function(){
+	$('.mini_rt').click(function(){
+		sendtweet($(this).attr('parent_id'),$(this).attr('retweet_id'),$(this).attr('location_id'),$(this).attr('activity_id'),$(this).attr('back_id'),$(this).attr('lname'),$(this).attr('actname'));
+	});
+	$('.mini_ct').click(function(){
+		sendcomment($(this).attr('back_id'),$(this).attr('tweet_id'));
+	});
+});
+</script>
+<%
+i=0
+@tweets.each do |t|%>
+<li class='mini_feed item' num='<%=i%>' tweet_id='<%=t.id%>'>
+  <div class='head_col'>
+	<div class='avatar_mini' style="background:url('<%=t.user.avatar.url(:mini)%>');"></div>
+  </div>
+  <div class='mini_content'>
+
+		<p>
+		  <%=link_to t.user.name,user_path(t.user),:class=>'namecard',:tweet_id=>t.id%>:
+		  <span tweet_id='<%=t.id%>' rel='tweet_content'><%=t.content%></span>
+		</p>
+		<% if t.retweet_id!='0' && t.retweet_id!=0
+			rt=Tweet.find(t.retweet_id)
+			rt_id=rt.id
+			%>
+			<div class='mini_feed_sub'>
+		  		<dd class="arrow">
+		  				<em>◆</em>
+		  				<span>◆</span>
+		  		</dd>
+				<p style='color:#777777;'><%=link_to "@"+rt.user.name,user_path(rt.user),:class=>'namecard'%>:<%=rt.content%></p>
+				<div class='mini_op_line'>
+					<%=link_to "@"+rt.location.name, location_path(rt.location),:class=>'mini_opb'%>
+					<%if rt.activity_id!=0 && rt.activity_id!='0'%>
+					<%=link_to "#"+rt.activity.title, activity_path(rt.activity),:class=>'mini_opb'%>
+					<%end%>			
+				</div>
+				<div class='mini_op_line'>
+					<div class='mini_c_time'>
+					<%=rt.created_at.strftime('%Y-%m-%d %H:%M')%>
+					</div>
+					<%
+					ract_title=''
+					if (rt.activity_id!=0)
+						ract_title=rt.activity.title
+					end
+					%>
+					<a href='javascript:void(0);' class='mini_rt' retweet_id='<%=rt.id%>' parent_id='<%=rt.id%>' location_id='<%=rt.location_id%>' activity_id='rt.activity_id'  back_id='<%=t.id%>' actname='<%=ract_title%>'>原文转发(<%=rt.retweetsnum%>)</a><a  href='javascript:void(0);' back_id='<%=t.id%>' tweet_id='<%=rt.id%>' class='mini_ct'>原文留言(<%=rt.commentsnum%>)</a>				
+				</div>
+			</div>
+		<%else
+			rt_id=0
+		end%>
+
+
+
+		<div class='mini_op_line'>
+			<%=link_to "@"+t.location.name, location_path(t.location),:class=>'mini_opb'%>
+			<%act_title=''
+			if t.activity_id!=0 && t.activity_id!='0'
+
+				act_title=t.activity.title
+			%>
+			<%=link_to "#"+t.activity.title, activity_path(t.activity),:class=>'mini_opb'%>
+			<%end%>
+		</div>
+		<div class='mini_op_line'>
+			<div class='mini_c_time'>
+			<%=t.created_at.strftime('%Y-%m-%d %H:%M')%>
+			</div>
+			<a  href='javascript:void(0);' class='mini_rt' retweet_id='<%=rt_id%>' parent_id='<%=t.id%>' location_id='<%=t.location_id%>' activity_id='<%=t.activity_id%>'  back_id='<%=t.id%>' lname='<%=t.location.name%>'  actname='<%=act_title%>'>转发(<%=t.retweetsnum%>)</a><a  href='javascript:void(0);' 
+			tweet_id='<%=t.id%>' back_id='<%=t.id%>' class='mini_ct'>留言(<%=t.commentsnum%>)</a>
+		</div>
+  </div>
+</li>
+
+
+<%i+=1
+end%>
+<li class='mli' len='<%=i%>'>
+</li>

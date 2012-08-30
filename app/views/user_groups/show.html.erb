@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_group.user_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @user_group.name %>
+</p>
+
+<%@tweets.each do |t|%>
+  <%=t.user_id%><br>
+  <%=t.location_id%><br>
+  <%=t.created_at%><br>
+  <%=t.content%><br>
+
+<%end%>
+
+<%= link_to 'Edit', edit_user_group_path(@user_group) %> |
+<%= link_to 'Back', user_groups_path %>

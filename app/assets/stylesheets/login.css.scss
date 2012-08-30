@@ -1,0 +1,118 @@
+@mixin best_input($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+body{
+	padding:0px;
+	margin:0px;
+	height:100%;
+	min-height:600px;
+	display: block;
+}
+input{
+	@include best_input(5px);
+	height:40px;
+	width:260px;
+	margin:10px;
+	background-color: #faffbd;
+	-shadow: 0 1px 0 rgba(255, 255, 255, .3),0 1px 3px rgba(0, 0, 0, .3) inset;
+	border: 1px solid #0D7BD5;
+	color: #888;
+	outline:none;
+	float:right;
+}
+
+.submit{
+	background: #1E95E5;
+	color: #B7D4EC;
+	color: rgba(255, 255, 255, .7);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, .05),0 1px 0 rgba(255, 255, 255, .15) inset;
+	border: 1px solid #147DCD;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 18px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+	padding: 6px 15px;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 5px;
+	float: right;
+
+	height:40px;
+	width:60px;
+	margin-left:215px;
+}
+#submit:active {
+background: #1D8FDB;
+box-shadow: 0 1px 0 rgba(255, 255, 255, .15);
+}
+
+#user_email{
+	margin-top:45px;
+}
+#main{
+	@extend body;
+	width:100%;
+	height:100%;
+	background:url('glow.png') no-repeat #0d78D5 center;
+	position:absolute;
+	left:0;
+	top:0;
+	overflow: hidden;
+
+}
+#mask{
+	width:200%;
+	height:100%;
+}
+.box        { width:50%; height:100%; float:left; }
+#logo{
+	display: block;
+	background: url('logo-login.png') no-repeat center;
+	width:200px;
+	height:100%;
+	float:left;
+}
+#box{
+	top:90px;
+	left:30%;
+	float:left;
+	height:180px;
+	width:500px;
+}
+.register:hover {
+background: rgba(0, 0, 0, .15);
+}
+.register {
+font-size: 14px;
+color: #B7D4EC;
+color: rgba(255, 255, 255, .7);
+display: block;
+background: rgba(0, 0, 0, .1);
+padding: 3px 15px;
+border-radius: 50px;
+box-shadow: 0 1px 0 rgba(255, 255, 255, .15),0px 1px 3px rgba(0, 0, 0, .2) inset;
+	text-decoration:none;
+}
+#menu { 
+	float:right; 
+	position:absolute; 
+	top:100px; 
+	right:500px; 
+	z-index:10; 
+}
+ul{list-style-type:none;}
+
+.content{ 
+	width:960px; 
+	height:400px; 
+	top:20%; 
+	margin: 0 auto; 
+	position:relative;
+	border-radius:35px; -moz-border-radius:35px; -webkit-border-radius:35px; 
+}

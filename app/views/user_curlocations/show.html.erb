@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_curlocation.user_id %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @user_curlocation.location_id %>
+</p>
+
+<p>
+  <b>Open time:</b>
+  <%= @user_curlocation.open_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_curlocation_path(@user_curlocation) %> |
+<%= link_to 'Back', user_curlocations_path %>

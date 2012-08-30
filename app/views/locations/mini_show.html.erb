@@ -1,0 +1,7 @@
+<div class='location_mini_show'>
+	<%=render :partial=>'public/icon', :locals=>{:icon_type=>'location',:obj=>@location}%>
+	<span  class='tag_name'><%=@location.name%></span>
+	<br/>
+	<div style='margin-left:8%;padding-top:5px;width:84%;float:left;border-top: solid 1px #E9E9E9;'>
+	<%=link_to '我在这里',{:controller=>:locations,:action=>:at_here,:location_id=>@location.id},:remote=>true,:class=>'at_here_button'%>
+</div>

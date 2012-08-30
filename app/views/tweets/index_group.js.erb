@@ -1,0 +1,22 @@
+$('#tweets_box').empty();
+<%@tweet.each do |t|%>
+
+
+$('#tweets_box').append(
+   " <div class='.tweets_line'>"
+   		+"<div class='head_pic'>"
+			+"<a  href='<%=user_path(t.user)%>'>"
+			+"<img title='<%=t.user.name%>' imgtype='head' src='<%=t.user.avatar.url(:thumb)%>'/ >"
+			+"</a>"
+		+"</div>"
+		+"<div class='words'>"
+		+"<p class='textstyle'>"
+		+"<a  href='<%=user_path(t.user)%>' title='<%=t.user.name%>'><%=t.user.name%>"
+		+"</a>：<%=t.content%><br><a class='date' href='<%=tweet_path(t)%>'><%=t.created_at.strftime('%Y年%m月%d日  %H:%M')%></a>"
+		+"Location:<a class='location' href='<%=location_path(t.location)%>'><%=t.location.name%></a>"
+			+"<a>retweet(<%=t.retweetsnum%>)</a><a>comment(<%=t.commentsnum%>)</a></p></div><% if t.photo_file_name!=nil%><img src='<%=t.photo.url(:small)%>'/><%end%><hr/></div>"); 
+<%end%>
+
+
+
+

@@ -1,0 +1,28 @@
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  var jug = new Juggernaut;
+  jug.subscribe("online_location_<%=@location.id%>", function(data){
+  	if (data.op=='add')
+  	{
+      $('<div/>').attr('uid',data.id).html(data.name).appendTo('#msg');
+      $('#online_num').text(	parseInt($('#online_num').text())	+	1);
+	}
+	if (data.op=='del')
+	{
+	  $('#msg').find('[uid='+data.id+']').remove();
+	  $('#online_num').text(	parseInt($('#online_num').text())	-	1);
+	}
+  });
+
+});
+</script>
+<span style='float:left'>在线人数</span>
+<div id='online_num' style='float:left;'>
+	<%=@users.count%>
+</div>
+<br/>
+<div id='msg' style='float:left;'>
+	<%@users.each do |u|%>
+		<div uid='<%=u.id%>'><%=u.name%></div>
+	<%end%>
+</div>

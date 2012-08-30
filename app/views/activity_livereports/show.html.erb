@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @activity_livereport.user_id %>
+</p>
+
+<p>
+  <b>Activity:</b>
+  <%= @activity_livereport.activity_id %>
+</p>
+
+<p>
+  <b>To user:</b>
+  <%= @activity_livereport.to_user_id %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @activity_livereport.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_activity_livereport_path(@activity_livereport) %> |
+<%= link_to 'Back', activity_livereports_path %>

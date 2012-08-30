@@ -1,0 +1,37 @@
+
+
+<div class='tag_main'>
+	<p id="notice"><%= notice %></p>
+
+    <%if @tag.icon_file_name==nil%>
+	<div style="background-image:url('<%=image_path("no-image.gif")%>');" class='tags_icon'></div>
+	<%else%>
+	<div style="background-image:url('<%=@tag.icon.url(:normal)%>');" class='tags_icon'></div>
+	<%end%>
+
+	<div class='tag_right'>
+		<div class='tag_name'>
+ 			<%=@tag.name %>
+ 		</div>
+    <br/>
+    <br/>
+ 		<div class='tag_refnum'>
+ 			引用数：<%=@tag.refnum%>
+ 		</div>
+    <br/>
+ 		<div class='tag_wiki'>
+  		&nbsp;&nbsp;&nbsp;&nbsp;<%=@tag.wiki%>
+  	</div>
+    <%= link_to '修改', edit_tag_path(@tag) ,:class=>'follow_button'%> 
+  	<%=render :partial=>'public/follow_button',:locals=>{:target=>'tag',:follow_id=>@tag.id}%>
+  	</div>
+  	<div class='tag_o'>
+  		<div class='profile_o_button' tag_id='<%=@tag.id%>'>
+  			最新活动
+  		</div>
+  	</div>
+
+</div>
+  	<div id='tag_feed'>
+
+   	</div>

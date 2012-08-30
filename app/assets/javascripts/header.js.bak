@@ -1,0 +1,65 @@
+$(document).ready(function(){
+  
+  
+  //auto match @
+
+  //retweet
+
+  //follow someone
+  $('#follow_select_form').bind('ajax:success', function(evt,data,status,xhr) {
+    $('#follow').hide();
+    $('#follow').after("<a href='/user_group_follows/cancel_follow?user_id="+xhr.responseText+"' class='user_follow_cancel'>cancel_follow</a>");
+    }).bind("ajax:error", function(e,xhr){
+       document.write(xhr.responseText);
+ 	});
+  
+  //show certain group
+ /* $('.user_group').bind('ajax:success',function (evt,data,status,xhr){
+  	var json=JSON.parse(xhr.responseText);
+  	var i=0;
+  	$('#tweets_box').empty();
+  	while (i<json.length)
+  	{
+  	$('#tweets_box').append("<div class='tweet_line'>"+json[i].content+'</div>');
+  	i=i+1;
+  	}
+  }).bind("ajax:error", function(e,xhr){
+    document.write(xhr.responseText);
+  });
+  */
+  
+  //follow button
+  	$('#follow').click(function(){
+		$("#follow_select_form").dialog("open");
+	});
+	$('#follow_select_form').dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons:{
+			"Follow": function(){
+				$(this).submit();
+				$(this).dialog("close");
+			},
+			Cancel: function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+	
+	//   users/home.html  auto_load_group-->all
+	$('#user_group1').trigger("click");
+	
+	
+	//   search box autocomplete
+$(function() {
+		var availableTags = [];
+		$( "#search_area" ).autocomplete({
+			source: "http://localhost:3000/search/autocomplete"
+		});
+	});
+
+	
+});

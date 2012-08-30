@@ -1,0 +1,23 @@
+
+
+<% if @message.to_s=='fail'%>
+$('<div id="dialog" title="消息"><p>发布失败</p></div>').dialog();
+<%else%>
+$('<div id="dialog" title="消息"><p><%=@message.to_s%></p></div>').dialog();
+
+var c_b=$('.comment_button[activity_id=<%=@activity_comment.activity_id%>]');
+var old_content=c_b.html();
+var len=parseInt(old_content.substring(3,old_content.length-1))+1;
+c_b.html("留言("+len+")");
+
+loadcomments(<%=@activity_comment.activity_id%>);
+<%end%>
+
+setTimeout("disclose();",1000);
+function disclose()
+{
+	$('.ui-dialog').fadeOut(500);
+	$('#dialog').fadeOut(500);
+	
+    setTimeout("$('#dialog').dialog('destroy');$('#dialog').remove();",700);
+}

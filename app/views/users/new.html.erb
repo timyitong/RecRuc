@@ -1,0 +1,46 @@
+<html>
+<head>
+  <title>RecRuc</title>
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" /> 
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" />
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+</head>
+
+<%=stylesheet_link_tag 'register'%>
+<%=javascript_include_tag 'jquery'%>
+
+<div id='main'>
+		<h1 style='text-align:left;'>
+			<%=image_tag image_path('logo-reg.gif')%>
+		</h1>
+		<div id='main_header'>
+		</div>
+	    <div id='note'>
+		<%=notice%>
+		</div>
+		<div id='f'>
+		<%=form_tag('/users/reg', :method=>:post) do%>
+		  <div class="field">
+		    <div class='t'>邮箱</div>
+		    <%=text_field :user,:email %>
+		  </div>
+		  <div class="field">
+		    <div class='t'>昵称</div>
+		    <%=text_field :user,:name %>
+		  </div>
+		  <div class="field">
+		    <div class='t'>密码</div>
+		    <%=password_field :user,:password %>
+		  </div>
+		  <div class="field">
+		  	<div class='t'>确认</div>
+		  	<%=password_field :user,:password_confirmation%>
+		  </div>
+		    <%=submit_tag '注册' ,:class=>'b'%>
+		<% end %>
+	    </div>
+</div>
+
+</html>
+

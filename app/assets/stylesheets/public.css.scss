@@ -1,0 +1,248 @@
+// Place all the styles related to the public controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+@mixin box-shadow($w1,$w2,$color){
+  -moz-box-shadow: 0 $w1 $w2 $color;
+  -webkit-box-shadow: 0 $w1 $w2 $color;
+  box-shadow: 0 $w1 $w2 $color;
+}
+@mixin border{
+position: relative;
+clear: left;
+background: white;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+border:1px solid #ddd;
+}
+.new_stuff{
+	float:left;
+	height:100%;
+	padding-top:8px;
+	margin-left:10px;
+	font-weight:bold;
+	font-size:12pt;
+}
+.collection_button{
+	display: block;
+	width:80px;
+	height:24px;
+	padding-top:3px;
+	margin-top:13px;
+	float:left;
+	font-size:13px;
+	color:#777;
+
+	cursor:pointer;
+	text-align:center;
+}
+.collection_button:hover{
+	@extend .collection_button;
+}
+.collection_button_clicked{
+
+	@extend .collection_button;
+		color:#444;
+	font-weight:bold;
+border-radius: 5px 5px 0 0;
+-moz-border-radius: 5px 5px 0 0;
+-webkit-border-radius: 5px 5px 0 0;
+}
+#main_box_top{
+	width:40%;
+	margin-left:30%;
+ 	margin-right:30%;
+	background:#ddd;
+	float:left;
+	a{
+		float:left;
+	}
+}
+#user_profile{
+	height:auto;
+	width:100%;
+	float:left;
+	/*border:1px solid #d9dce2;*/
+	@include border;
+}
+#publish_box{
+	width:500px;
+	height:auto;
+	float:left;
+}
+#big_avatar{
+  width:100px;
+  height:100px;
+  float:left;
+  display:block;
+  background-repeat:no-repeat;
+  margin:10px;
+  border:1px solid #ddd;
+  @include radius1(8px);
+}
+
+#home_main{
+	width:75%;
+	height:auto;
+	float:left;
+}
+#home_right{
+	width:24%;
+	height:auto;
+	float:left;
+	margin-left:5px;
+	margin-top:15px;
+}
+#home_top{
+	width:100%;
+	height:auto;
+	@include border;
+	float:left;
+	/*background:#f1f4fa;
+	*/
+	margin-top:15px;
+}
+#home_content{
+	width:100%;
+	float:left;
+	height:auto;
+	margin-left:-2px;
+
+}
+#home_content_switcher{
+	width:100%;
+	float:left;
+	border-bottom: 1px solid #E7E7E7;
+	margin-bottom:10px;
+}
+#left_bar{
+	width:30%;
+	float:left;
+	height:100%;
+}
+#hot_list{
+	width:100%;
+	float:left;
+	/*border:1px solid #d9dce2;*/
+	margin-top:10px;
+	margin-left:-1px;
+	@include border;
+
+}
+#button_list{
+  @extend #hot_list;
+}
+.button_list_item{
+  width:100%;
+  height:auto;
+  display: block;
+  font-size:13px;
+  color:#259;
+  line-height:30px;
+  text-decoration:none;
+}
+.button_list_item:hover{
+	@extend .button_list_item;
+	background: #E1F0F7;
+	
+}
+#ongoing_list{
+	@extend #hot_list;
+}
+.more{
+	color:#259;
+	margin-left:5px;
+	text-decoration:none;
+	font-size:12px;
+}
+.more:hover{
+	@extend .more;
+	text-decoration:underline;
+}
+.ongoing_head{
+	color:#259;
+	margin-left:5px;
+	margin-top:10px;
+	margin-bottom:10px;
+	width:100%;
+	float:left;
+}
+.ongoing_line{
+	  display: block;
+  font-size:13px;
+  background:#e1f0f7;
+  text-decoration:none;
+  width:auto;
+  height:auto;
+  float:left;
+  color:#225599;
+margin: 0 5px 5px 0;
+  padding:3px;
+  @include radius1(30px);
+  padding: 0 10px;
+  margin:5px;
+}
+.ongoing_line:hover{
+	  @extend .ongoing_line;
+  color:#ffffff;
+  background-color: #225599;
+}
+.home_ul{
+
+}
+.home_li{
+}
+.mode_switch_tweet{
+	background:#26a2da;
+	text-decoration:none;
+	color:white;
+	width:80px;
+	height:30px;
+	@include radius1(5px);
+	margin-bottom:15px;
+	display: block;
+	padding:5px;
+	float:left;
+	padding-top:15px;
+	margin:15px;
+	text-align:center;
+}
+.mode_switch_act{
+	@extend .mode_switch_tweet;
+}
+
+.mode_switch_tweet:hover{
+	@extend .mode_switch_tweet;
+	color:#26a2da;
+	background:#ffffff;
+}
+
+.mode_switch_act:hover{
+	@extend .mode_switch_act;
+	background:white;
+	color:#3366cc;
+}
+/*
+.home_send{
+	text-decoration:none;
+	float:left;
+	display: block;
+	margin-top:30px;
+}
+*/
+.home_top_line{
+  width:100%;
+  float:left;
+}

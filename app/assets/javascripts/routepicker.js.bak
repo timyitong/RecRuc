@@ -1,0 +1,68 @@
+
+
+	function load_locations(id){
+		$('#rp_cur').html($('#location_namecard_'+id).html());
+		$('#rp_cur').attr('location_id',id);
+		
+		$('#rp_locations').empty();
+		var url='http://localhost:3000/locations';
+		if (id!=null) url=url+'?id='+id;
+		var data={};
+		//load locations index
+		$.getJSON(url,data,function (json){
+			var i=0;
+			
+			while (i<json.length)
+			{
+				var html='<a id="location_namecard_'+json[i].id+'" class="location_namecard" href="javascript:void(0)" onclick="load_locations('+json[i].id+')">'+json[i].name+'</a>';
+				$('#rp_locations').append(html);
+				i++;
+			}
+		    up_id=cur_id;
+		    cur_id=id;
+		});
+		
+		//load location route
+		var url2='http://localhost:3000/locations/'+id;
+		var data2={};
+		$.getJSON(url2,data2,function (json){
+
+		
+		    var rs=new Array();
+		    rs=json.uptree.match(/\d+/g);
+		    $('#rp_route').html("	<span>路径：</span>");
+		    //$('#rp_route').append('::'+rs.length+'::');
+			if (rs!=null){
+			   var i=0;
+			   while(i<rs.length){
+			   	$('#rp_route').append('<img alt="Arrow1" src="/assets/arrow/arrow1.gif"><a  id="location_namecard_'+rs[i]+'" href="javascript:void(0);" onclick="load_locations('+rs[i]+');"></a>');
+				
+			   	$.getJSON('http://localhost:3000/locations/'+rs[i],{},function(json){
+			   		$('#location_namecard_'+json.id).attr('class','location_namecard');
+			   		$('#location_namecard_'+json.id).text(json.name);
+			   		//document.write(json.name);
+			   	});
+			   	i++;
+			   }
+			   
+			}
+			
+
+			
+			
+		});
+		
+	}
+$(document).ready(function(){
+	
+		$('#rp_switch').toggle(function(){
+			$('#rp_main').fadeIn();
+		},
+							  function(){
+			$('#rp_main').fadeOut();
+		});
+		
+		$('#rp_main').fadeOut(0);
+});
+
+

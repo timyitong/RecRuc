@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @activity_user_action.user_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @activity_user_action.action_type %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @activity_user_action.note %>
+</p>
+
+
+<%= link_to 'Edit', edit_activity_user_action_path(@activity_user_action) %> |
+<%= link_to 'Back', activity_user_actions_path %>

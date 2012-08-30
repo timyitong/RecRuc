@@ -1,0 +1,41 @@
+<script>
+$(function(){
+	$('#s_time').datepicker();
+	$('#s_time').datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+	$('#e_time').datepicker();
+	$('#e_time').datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+
+	location_pick_box('#time_location');
+
+
+	$('#time_open').click(function(){
+		var lid=$('#time_location').attr('location_id');
+		var s_time=$('#s_time').val();
+		var e_time=$('#e_time').val();
+
+		$('#time_content').load(__SITE__+"/activities/?index=timemachine&part=true&location_id="+lid+"&s_time="+s_time+"&e_time="+e_time);
+	});
+});
+</script>
+<div id='time_top'>
+	<table style='width:100%;'>
+	<tr>
+		<span  style='color:#26a2da;font-size:18px;'>请设定条件</span>
+	</tr>
+	<tr>
+		<td>选择地点</td>
+		<td><div id='time_location' location_id='<%=session[:current_user_location]%>'></div></td>
+	<tr>
+		<td>选择时间</td>
+		<td  style='float:left;'><input type='text' id='s_time' style='float:left;'/><span  style='float:left;'> - </span><input type='text' id='e_time'  style='float:left;'/></td>
+	<tr>
+		<td>选择标签</td>
+		<td><%=render :partial=>'tags/select'%></td>
+		<td><a href='javascript:void(0);' class='normal_button' id='time_open'>穿梭</a></td>
+	</tr>
+	</table>
+</div>
+<div id='time_content'>
+</div>

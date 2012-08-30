@@ -1,0 +1,28 @@
+
+<div class='name_tag'>
+	<div class='avatar' style="background-image:url('<%=@user.avatar.url(:thumb)%>');"></div>
+  <%=link_to @user.name,user_path(@user),:class=>'namecard'%>
+</div>
+<br/>
+<div class='num_bar'>
+  <div class='num_item'>
+  	<div class='num_head'><%=@num[:follow_num]%></div>
+  	<div class='num_tag'>关注</div>
+  </div>
+  <div class='num_item'>
+  	<div class='num_head'><%=@num[:be_follow_num]%></div>
+  	<div class='num_tag'>粉丝</div>
+  </div>
+  <div class='num_item'>
+  	<div class='num_head'><%=@num[:tweet_num]%></div>
+  	<div class='num_tag'>微博</div>
+  </div>
+  <div class='num_item'>
+  	<div class='num_head'><%=@num[:activity_num]%></div>
+  	<div class='num_tag'>活动</div>
+  </div>
+</div>
+  <div style='margin-left:8%;padding-top:5px;width:84%;float:left;border-top: solid 1px #E9E9E9;'>
+      <%=link_to '我的收藏','/activities/collection',:class=>'button_list_item'%>
+      <a class='button_list_item'>我关注的人</a>
+      <a class='button_list_item'>我关注的标签</a>

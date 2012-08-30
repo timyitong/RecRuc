@@ -1,0 +1,29 @@
+<%= form_for(@activity_user_action) do |f| %>
+  <% if @activity_user_action.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity_user_action.errors.count, "error") %> prohibited this activity_user_action from being saved:</h2>
+
+      <ul>
+      <% @activity_user_action.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :action_type %><br />
+    <%= f.text_field :action_type %>
+  </div>
+  <div class="field">
+    <%= f.label :note %><br />
+    <%= f.text_field :note %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

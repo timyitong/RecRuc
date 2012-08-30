@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RecRuc</title>
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" /> 
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" />
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+  <%= stylesheet_link_tag    "layout" %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "jquery-ui/pepper-grinder/jquery-ui-1.8.18.custom" %>
+  <%= stylesheet_link_tag "bubbletip/bubbletip.css" %>
+
+
+  <%= javascript_include_tag 'jquery'%>
+  <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
+  <%= javascript_include_tag 'jquery-ui'%>
+  <%= javascript_include_tag 'jquery_ujs'%>
+  <%= javascript_include_tag 'jquery.sortElements'%>
+  <%= javascript_include_tag 'location_pick_box'%>
+  <%= javascript_include_tag 'jquery.bubbletip'%>
+
+
+
+
+
+
+  <%=javascript_include_tag 'follow_button'%>
+
+  
+  <%= javascript_include_tag 'header'%>
+
+<%=javascript_include_tag 'map'%>
+<%=javascript_include_tag 'location_pick_box'%>
+
+<%=stylesheet_link_tag 'map'%>
+
+</head>
+<body>
+<!--TOP THING-->
+<div id='top-for-pager'> 
+<div class='page-wrapper'>
+	<div id='top'>
+		<div class='logo'>
+		</div>
+		<a class='top_button' id='top_location' href='/home'>
+		  首页
+		</a>
+    <a class='top_button' id='top_location' href='/users/<%=session[:current_user_id]%>'>
+      个人主页
+    </a>
+    <a  class='top_button' id='top_location'>
+      时光机
+    </a>
+    <div id="xvk" class="xks xfr">
+        <div class="xis">
+            <input id='search_input' type="text" class="xhs" value="" placeholder="搜索标签、活动或人…">
+        </div>
+        <div class="xgs">搜索</div>
+    </div>
+	</div>
+</div>
+</div>
+
+<script type='text/javascript'>
+	var cur_id=<%=@location_map.location_id%>;
+function readallpoints(){
+	load_map('#map_main_edit',cur_id,function(){
+
+		$('[pid]').each(function(){
+				
+				$(this).resizable();
+				$(this).draggable();
+				$('<a></a>').attr('class','point_delete').html('删除').attr('data-remote','true').attr('href','/location_map_points/'+$(this).attr('pid')).attr('data-confirm','确定删除？').attr('data-method','delete').attr('rel','nofollow').appendTo($(this));
+				$(this).css('border','1px solid black');
+		});
+
+	},{location_name:'true'});
+}
+$(function(){
+	    readallpoints();
+
+	    $('#save_button').click(function(){
+	    	var arr=new Array()
+	    	var i=0;
+
+	    	var data='';
+	    	var obj;
+	    	$('[pid]').each(function(){
+	    		var d={};
+	    		d['id']=$(this).attr('pid')
+	    		d['width']=$(this).css('width');
+	    		d['width']=d['width'].substring(0,d['width'].length-2);
+
+	    		d['height']=$(this).css('height');
+	    		d['height']=d['height'].substring(0,d['height'].length-2);
+
+	    		d['cox']=$(this).css('left');
+	    		d['cox']=d['cox'].substring(0,d['cox'].length-2);
+
+	    		d['coy']=$(this).css('top');
+	    		d['coy']=d['coy'].substring(0,d['coy'].length-2);	 
+
+		    	$.post(__SITE__+"/location_map_points/saveall",d,function(json){
+
+		    	});
+	    	});
+	    	
+	    	//document.write(data);
+
+	    });
+});
+
+
+ 
+</script>
+<div id='location_map_main' style='position:fixed;left:0px;top:120px;'>
+	<div id='map_edge'>
+	<!--地图-->
+	<div id='map_box'>
+		<!--地图导航栏-->
+		<!--主栏-->
+		<div id='map_main_edit'>
+
+		</div>
+	</div>
+	</div>
+
+
+
+	<div id='info_box'>
+		<div id='info_route'>
+<%=render :partial=>'location_map_points/new', :locals=>{:location_id=>@location_map.location_id,:location_map_id=>@location_map.id}%>
+		<a href='javascript:void(0)' id='save_button'>保存编辑</a>
+		<%=render 'form'%>
+		</div>
+		<div id='info_index'>
+		</div>
+		<div id='info_head'>
+	
+		</div>
+		<div id='info_main'>
+
+		</div>
+		<div id='info_edit'>
+			
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+

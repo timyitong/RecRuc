@@ -1,0 +1,29 @@
+<%=stylesheet_link_tag 'activities'%>
+<%=javascript_include_tag javascript_path 'activities_form'%>
+<div id='activities_form_box_fast'>
+<%= form_for Activity.new do |f| 
+%>
+  <div class='field_fast'>
+    <%=image_tag image_path('act_fast_new_head.png')%>
+        <%=link_to '完整模式',new_activity_path, :target=>'_blank',:style=>'float:right;width:auto;color:#3366cc;text-decoration:none;margin-right:10px;margin-top:15px;'%>
+  </div>
+  <div class='field_fast'>
+      
+        <%=render :partial=>'locations/autopick',:locals=>{:inputid=>'locations_act_fastnew',:location_id=>session[:current_user_location]}%>
+    <div class='head'><strong style='float:left;margin-left:13px;font-size:13px;margin-top:5px;'>开始时间</strong></div>
+    <input id='activity_starttime' type='hidden' name='activity[starttime]' value='' placeholder='点击选择日期'/>
+    <input type='text' id='activities_datepicker_start' size="10"/>
+    <input type='number' id='activities_datepicker_start_h' value="00" size="2" style="width:36px;"/>:<input type='number' id='activities_datepicker_start_m' value="00" size="2" style="width:36px;"/>
+
+  </div>
+
+  <div class='field_fast'>
+  <strong style='float:left;margin-top:28px;font-size:13px;'>活动名</strong>
+  <%=f.text_field :title,:placeholder=>'活动名',:style=>'height:60px;width:420px;'%>
+  </div>
+
+  <div class="field_fast">
+    <%= f.submit '创建',:class=>'ac_button'%>
+  </div>
+<% end %>
+</div>

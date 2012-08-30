@@ -1,0 +1,46 @@
+// Place all the styles related to the Locations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+
+#location_show{
+	width:75%;
+	height:auto;
+	float:left;
+	@include radius1(5px);
+	background-color:#ffffff;
+}
+#location_head{
+ float:left;
+ width:auto;
+ margin-top:16px;
+}
+.location_title{
+ float:left;
+ margin-top:16px;
+ strong{
+
+ }	
+}
+.location_wiki{
+	float:left;
+	width:80%;
+	height:auto;
+}
+.location_o{
+ float:left;
+ width:100%;
+}
+#location_feed{
+ float:left;
+ width:75%;
+ height:auto;
+}

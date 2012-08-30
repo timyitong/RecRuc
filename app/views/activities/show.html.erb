@@ -1,0 +1,127 @@
+<%=stylesheet_link_tag 'activities'%>
+
+<script>
+  $(document).ready(function(){
+
+
+$('.comment').click(function(){
+        $("#show_main").load(__SITE__+"/activity_comments?part=true&activity_id=<%=@activity.id%>");
+        $(this).css('font-weight','bold');
+        $('.tweet').css('font-weight','normal');
+});
+$('.tweet').click(function(){
+        $('#show_main').load(__SITE__+'/tweets/list?part=true&activity_id=<%=@activity.id%>');
+        $(this).css('font-weight','bold');
+        $('.comment').css('font-weight','normal');
+});
+
+$('.comment').click();
+
+/*
+
+        $('.show_main').hide();
+        $('[tabid]').click(function(){
+          var tab=$(this).attr('tabid');
+          var c=$(this).attr('class');
+
+          $('[class=act_o_button_clicked]').each(function(){
+            $(this).attr('class','act_o_button');
+          });
+          $(this).attr('class','act_o_button_clicked');
+
+          $('.show_main').each(function(){
+            if ($(this).attr('id')!=tab)
+              {$(this).hide();}
+            else{$(this).show();}
+          });
+          //$("[tabid!="+tab+"]").attr('class','');
+          $("this").attr('class','a_visited');
+
+
+        });
+
+        $('[tabid]:first').click();
+
+        $('#show_main-4');
+*/
+  });
+</script>
+
+<div id='show_all'>
+
+  <ul class='sr_line'>
+    <%=link_to '',user_path(@activity.user),{:style=>"float:left;margin:5px;background:url('#{@activity.user.avatar.url(:thumb)}');",:class=>'avatar'}%>
+    <li class='show_title'>
+        <%=@activity.title%>
+    </li>
+    <br/>
+    <li style='float:left;'>
+      <%=link_to @activity.user.name,user_path(@activity.user),:class=>'show_user'%>
+      <span>    发起&nbsp;&nbsp;&nbsp;&nbsp;</span><span><%=@activity.created_at.strftime('%Y-%m-%d  %H:%M')%></span>
+    </li>
+  </ul>
+  <!--
+  -->
+<div id='show_head'>
+      <%if @activity.photo_file_name!=nil%>
+      <div class='show_poster'>
+      <%=image_tag @activity.photo.url(:large) %>
+      </div>
+      <%end%>
+      <div class='show_meta'>
+        <div class='meta_line'>
+          <div>
+            <a href='<%=location_path(@activity.location)%>'  class='meta_location'>
+              地点<span><%=@activity.location.name%></span>
+            </a>
+          </div>
+        </div>
+
+        <div class='meta_line'>
+          <div>
+          <a  class='meta_stime'>
+          开始<span><%=@activity.starttime.strftime('%m月%d日  %H:%M')%></span>
+          </a>
+          </div>
+        </div>
+        <div class='meta_line'>
+          <div>
+          <a  class='meta_etime'>
+          结束<span><%= @activity.endtime!=nil ? @activity.endtime.strftime('%m月%d日  %H:%M') : ''%></span>
+          </a>
+          </div>
+        </div>
+
+        <div class='meta_line'>
+          <%= link_to '编辑', edit_activity_path(@activity) ,{:class=>'meta_edit'}%>
+        </div>
+
+        <div class='meta_line'>
+          <a class='meta_collect' href=''>
+            收藏
+            <span>
+              <%=ActivityRef.where(:activity_id=>@activity.id,:ref_name=>'in').first.refnum.to_s%>人收藏
+            </span>
+          </a>
+        </div>
+        <div class='meta_line'>
+          <span style='float:left;color:black;margin-left:35px;'>简介</span>
+          <span><%=simple_format(@activity.slogan)%></span>
+        </div>
+      </div>
+      <div id='show_op'>
+        
+          <h2 class='section'>
+            <a class='comment'>
+              <%=ActivityRef.where(:activity_id=>@activity.id,:ref_name=>'comment').first.refnum%>条评论
+            </a>
+            <span class="sep">|</span>
+            <a class='tweet'>
+              <%=Tweet.where(:activity_id=>@activity.id).count%>条微博
+            </a>
+          </h2>
+      </div>
+      <div id='show_main'>
+      </div>
+</div>
+

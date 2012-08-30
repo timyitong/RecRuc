@@ -1,0 +1,59 @@
+<%=stylesheet_link_tag 'public'%>
+<%=javascript_include_tag javascript_path('public')%>
+<script>
+  function sort_by_desc(key)
+  {
+    $('.feed_main').sortElements(function (a,b){
+      return $(a).attr(key)<$(b).attr(key)? 1: -1;
+    });
+  }
+  function sort_by(key)
+  {
+    $('.feed_main').sortElements(function (a,b){
+      return $(a).attr(key)>$(b).attr(key)? 1: -1;
+    });
+  }
+</script>
+
+<div id='home_main'>
+  <div id='home_top'>
+    <div class='home_top_line'>
+        <a class='mode_switch_tweet' href='javascript:void(0);' home_switch='true'>活动模式</a>
+        <a class='mode_switch_tweet' id='st_button' href='javascript:void(0);' >+发微博</a>
+        <a class='mode_switch_tweet' id='sa_button' href='javascript:void(0);'>+发活动</a>
+    </div>
+    <ul class='home_ul'>
+      <li class='home_li' id='tweet_publish'>
+      <%=image_tag image_path('new.png'),:style=>'margin-left:25px;'%>
+      <div id='publish_box' style='margin-left:15px;margin-bottom:15px;'>
+      <%=render :partial=>'tweets/new',:locals=>{:retweet_id=>'0',:activity_id=>'0',:location_id=>'0',:d_text=>'',:parent_id=>'0'}%>
+      </div>
+      </li>
+      <li class='home_li' id='act_publish'>
+        <%=render 'activities/new_fast'%>
+      </li>
+    </ul>
+  </div>
+
+
+  <div id='home_content_switcher'>
+      <a class='collection_button' collection_id='user'>
+        关注人
+      </a>
+      <a class='collection_button' collection_id='tag'>
+        关注标签
+      </a>
+  </div>
+  <div id='home_content'>
+     <span style='text-align:center;width:100%;color:#777;font-size:12px;margin-left:40%;'> <%=image_tag image_path('loading.gif')%>正在加载</span>
+  </div>
+</div>
+<div id='home_right'>
+    <div id='user_profile'>
+    </div>
+    <div id='hot_list'>
+    </div>
+    <div id='ongoing_list'>
+    </div>
+</div>
+

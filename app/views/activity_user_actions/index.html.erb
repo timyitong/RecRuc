@@ -1,0 +1,149 @@
+
+<%=stylesheet_link_tag 'activities'%>
+
+<script>
+$(function(){
+  $('.f_c_text').mouseenter(function(){
+    $(this).animate({'opacity':'0.95'},100);
+  });
+  $('.f_c_text').mouseleave(function(){
+    $(this).animate({'opacity':'0'},0);
+  });
+
+
+//-------寻找重复的活动，并且将它们合并
+  var a_collect={};
+  var aid_stack=new Array();
+  $('.feed_main_d').each(function(){
+    if (a_collect[$(this).attr('activity_id')]==undefined)
+    { 
+      a_collect[$(this).attr('activity_id')]=1;
+      aid_stack.push($(this).attr('activity_id'));
+    }
+    else{
+      a_collect[$(this).attr('activity_id')]+=1;
+    }
+  });
+  
+  while (aid_stack.length!=0){
+    var aid=aid_stack.pop();
+
+    if (a_collect[aid]>1){
+
+    $('.feed_main_d[activity_id='+aid+']').hide();
+    var f=$('.feed_main_d[activity_id='+aid+']:first');
+    $('<li/>').html(a_collect[aid]+'条类似').css('cursor','pointer').attr('activity_id',aid).click(function(){
+      var aid2=$(this).attr('activity_id');
+      $('.feed_main_d[activity_id='+aid2+']').show();
+    }).appendTo(f.find('ul.tools'));
+    f.show();
+
+    }
+  }
+//-------------------
+//将收藏完后的心变成红色
+  $('li.collect a').bind('ajax:success',function(evt,data,status,xhr){
+    $(this).css('background-position','0 -34px');
+    $(this).html(parseInt($(this).html())+1);
+    $(this).attr('href','javascript:void(0);')
+  });
+
+
+
+});
+</script>
+
+<% @activity_user_actions.each do |user_action|%>
+
+
+<div class='feed_main_d' starttime='<%=user_action.activity.starttime%>' activity_id='<%=user_action.activity.id%>'>
+  <div class='feed_c_d'>
+    <ul class='feed_c_img'>
+      <%if user_action.activity.photo_file_name !=nil%>
+         <li class='f_c_over'>
+          <%=image_tag user_action.activity.photo.url(:small) %>
+         </li>
+        <li class='f_c_text'>
+              <div class='f_c_line'>
+                  <strong>
+                        <%= link_to user_action.activity.title, user_action.activity %>
+                        </strong>
+                        </div>
+                        <div class='f_c_line'>
+                        <div class='f_c_time'>
+                        <%=user_action.activity.location.name%>
+                        <br/>
+                        <%=user_action.activity.starttime.strftime('%m月%d日  %H:%M')%>
+                  </div>
+              </div>
+                  <div class='f_c_line'>
+
+                    <div class='feed_c_tag'>
+                      <%user_action.activity.tags.each do |t|%>
+                        <%=link_to t.name,tag_path(t),:class=>'tag_button'%>
+                      <%end%>
+                    </div>
+                  </div>
+         </li>
+      <%else%>
+        <li class='f_c_over' style='opacity:1;'>
+              <div class='f_c_line'>
+                  <strong>
+                        <%= link_to user_action.activity.title, user_action.activity %>
+                        </strong>
+                        </div>
+                        <div class='f_c_line'>
+                        <div class='f_c_time'>
+                        <%=user_action.activity.location.name%>
+                        <br/>
+                        <%=user_action.activity.starttime.strftime('%m月%d日  %H:%M')%>
+                  </div>
+              </div>
+                  <div class='f_c_line'>
+
+                    
+                      <%user_action.activity.tags.each do |t|%>
+                        <%=link_to t.name,tag_path(t),:class=>'tag_button'%>
+                      <%end%>
+          
+                  </div>
+         </li>
+      <%end%>
+         
+    </ul>
+    <ul class='tools'>
+                  <li class='collect'>
+                    <%if ActivityUserAction.where(:activity_id=>user_action.activity.id,:user_id=>session[:current_user_id],:action_type=>'in').exists?%>
+                    <a title='收藏'  style='background-position:0 -34px;' href='javascript:void(0);'>
+                      <%=ActivityRef.where(:activity_id=>user_action.activity.id,:ref_name=>'in').first.refnum%>
+                    </a>
+
+                    <%else%>
+                    <a title='收藏'  data-remote='true' href=" /activity_user_actions/addAction?action_type=in&note=''&activity_id=<%=user_action.activity_id%>">
+                      <%=ActivityRef.where(:activity_id=>user_action.activity.id,:ref_name=>'in').first.refnum%>
+                    </a>
+                    <%end%>
+                  </li>
+                  <li class='comment'>
+                    <a title='评论'>
+                    <%=ActivityRef.where(:activity_id=>user_action.activity.id,:ref_name=>'comment').first.refnum%>
+                    </a>
+                  </li>
+    </ul>
+      
+        
+  </div>
+  <h2>
+    <a href='<%=user_path(user_action.user)%>'>
+    <%=image_tag image_path(user_action.user.avatar.url(:mini))%>
+    <%=user_action.user.name%>
+    </a>
+    <%arr={'share'=>'分享','watch'=>'围观','in'=>'收藏','create'=>'发起'}%>
+    <span style='float:left;margin-left:10px;'><%=arr[user_action.action_type]%></span>
+  </h2>
+</div>
+
+
+
+<%end%>
+

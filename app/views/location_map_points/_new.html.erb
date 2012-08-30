@@ -1,0 +1,53 @@
+<script>
+$(function(){
+	$('#new_point_dialog').dialog({
+		autoOpen:false,
+		modal:false,
+		buttons:{
+			"创建": function() {
+
+					$('#new_location_map_point').submit();
+					//document.write('shit');
+					$( this ).dialog( "close" );
+					
+				},
+			"取消": function() {
+					$( this ).dialog( "close" );
+				}
+		}
+	});
+
+	$('#new_point_button').click(function(){
+		$('#new_point_dialog').dialog('open');
+	});
+	
+	location_pick_box('#location_pick');
+});
+	  	
+</script>
+
+<a class='add_new_point' id='new_point_button' href='javascript:void(0);'>圈出一个地点</a>
+<div id='new_point_dialog' title='圈出一个地点'>
+<%= form_for(LocationMapPoint.new,:remote=>true) do |f| %>
+
+    
+
+  <strong>选中一个地点：</strong>
+  <div id='location_pick' location_id='<%=location_id%>'>
+
+  </div>
+  <strong>一小句描述</strong>
+  <%= f.text_field :point_name %>
+
+    <%= f.hidden_field :cox,:value=>0%>
+    <%= f.hidden_field :coy,:value=>0%>
+	<%= f.hidden_field :width,:value=>60%>
+	<%= f.hidden_field :height,:value=>120%>
+
+    <%= f.hidden_field :location_map_id,:value=>location_map_id%>
+
+    <%= f.hidden_field :point_img_id %>
+
+<% end %>
+</div>
+

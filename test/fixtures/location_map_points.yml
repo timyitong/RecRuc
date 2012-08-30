@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  point_name: MyString
+  target_id: 1
+  cox: 1
+  coy: 1
+
+two:
+  point_name: MyString
+  target_id: 1
+  cox: 1
+  coy: 1

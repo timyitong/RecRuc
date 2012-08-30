@@ -1,0 +1,328 @@
+<%=javascript_include_tag javascript_path 'map'%>
+<%=stylesheet_link_tag 'map'%>
+<script type='text/javascript'>
+   var cur_tweet=-1;
+   var cur_tweet_end=0;
+   var cur_act=-1;
+   var cur_act_end=0;
+   var back_stack= new Array();
+   var forward_stack= new Array();
+   var location_collection={};
+   var cur_location=<%=location_map.location_id%>;
+
+   var cur_info='#info1';
+
+   var last_tag=0;
+   var last_type='tweet_id';//last_type='action_id'  //activity_user_actions
+//---------------------------------------------
+	$(function(){
+
+	get_map(cur_location,'click');
+
+		$('#next').click(function(){
+			$('#map_main').scrollTo($(this).attr('tag'),500);
+		});
+
+		$('#back').click(function(){
+			$('#map_main').scrollTo($(this).attr('tag'),500);
+		});
+
+
+$('#feed_concise').scrollable({
+	items:'#fc_mask',
+	keyboard: 'static',
+    onSeek: function(event, i) {
+          vertical.eq(i).data("scrollable").focus();
+    }
+
+}).navigator('#mini_navi');
+var vertical=$('.fc_li').scrollable({items:'.mini_vertical_items',vertical:true});
+vertical.eq(0).data("scrollable").focus();
+
+//默认加载微博：
+  // load_mini_tweets(<%=location_map.location_id%>);
+
+});
+//---------------------------------
+//装载活动：
+	
+function load_mini_activities(lid,callback){
+    $('#fc2_sub_mask').load(__SITE__+"/activities/mini_list?partial=true&location_id="+lid,function(){
+    });
+
+}
+//装载微博
+function load_mini_tweets(lid,callback){
+	$('#fc1_sub_mask').load(__SITE__+"/tweets/mini_list?partial=true&location_id="+lid,function(){
+		cur_tweet=0;
+		cur_tweet_end=parseInt($('.mli[len]').attr('len'));
+		$('#tml_begin').slideUp(300);
+		//$('#feed_concise').scrollTo('li[tweet_id][num=0]',300,function(){});
+
+		if (callback){callback();}
+		//alert(cur_tweet_end);
+	});
+}
+
+
+function go_to(lid){
+	//alert(lid);
+	$('#map_main').scrollTo('.mli[lid='+lid+"]",500,function(){
+
+		//Questionable Codes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+		//Questionable Codes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	});
+
+}
+function load_online_users(lid){
+	$('#fc3_sub_mask').load(__SITE__+'/public/online_user?part=true&location_id='+lid);
+}
+function get_map(location_id,option){
+	if (option=='click'){
+
+		if (location_collection[location_id]==undefined)
+		{
+			$("<li class='mli'></li>").attr('lid',location_id).appendTo('#map_mask');
+			$("li[lid="+location_id+"]").after('<br/>');
+
+			load_map("li[lid="+location_id+"]",location_id,function (){
+				go_to(location_id);
+				back_stack.push(cur_location);
+				forward_stack.length=0;
+				cur_location=location_id;
+
+				location_collection[location_id]=1;
+
+			});
+		}
+		else{
+			go_to(location_id);
+			back_stack.push(cur_location);
+			cur_location=location_id;
+			forward_stack.length=0;
+		}
+	    //装载活动
+	    load_mini_activities(location_id);
+	    load_online_users(location_id);
+		//装载tweets
+	    load_mini_tweets(location_id);
+	    //装载位置名片
+	    load_location_namecard(location_id);
+	}
+	if (option=='back'){
+		if (back_stack.length>0){
+		var llid=back_stack.pop();
+		if (forward_stack.push(cur_location)==1){
+				//make the forward_button valid
+				//alert('haha');
+			}
+		if (back_stack.length==0){
+				//make the back_button invalid
+			}
+
+		go_to(llid);
+		cur_location=llid;
+
+
+		//装载tweets
+	    load_mini_tweets(llid);
+	    //装载活动
+	    load_mini_activities(location_id);
+	    //装载位置名片
+	    load_location_namecard(llid);
+		}
+	}
+	if (option=='forward') {
+		if (forward_stack.length>0){
+		var llid=forward_stack.pop();
+		
+		if (back_stack.push(cur_location)==1){
+			//make the back_button valid
+		}
+		if (forward_stack.length==0){
+			//make the forward_button invalid
+		}
+		
+		go_to(llid);
+		cur_location=llid;
+
+
+		//装载tweets
+	    load_mini_tweets(llid);
+	    //装载活动
+	    load_mini_activities(location_id);
+	    //装载位置名片
+	    load_location_namecard(llid);
+		}
+	}
+
+}
+
+function load_location_namecard(lid)
+{
+	
+	$.getJSON(__SITE__+"/locations/"+lid,function(json){
+		var tag=(cur_info=='#info1')? "#info2" : "#info1";
+		cur_info=tag;
+		$(tag).empty();
+		//alert(tag);
+		$('<div></div>').attr('class','avatar').css('background',"url('"+json.url+"')").appendTo(tag);
+		$('<div></div>').attr('class','location_name').html(json.location.name).appendTo(tag);
+		$('<br/>').appendTo(tag);
+		
+		$('<a></a>').attr('class','location_edit').html('编辑').attr('href',__SITE__+"/locations/"+json.location.id+"/edit").appendTo(tag);
+		$('<a></a>').attr('class','location_edit').html('编辑地图').attr('target','_blank').attr('href',__SITE__+"/location_maps/"+json.map_id+"/edit").appendTo(tag);
+		$('<a></a>').attr('class','at_here_button').html('我在这里').attr('href',__SITE__+"/locations/at_here?location_id="+json.location.id).attr('data-remote','true').appendTo(tag);
+
+		$('<div></div>').attr('class','location_nametree').html(json.location.nametree).appendTo(tag);
+		$('<div></div>').attr('class','location_wiki').html(json.location.wiki).appendTo(tag);
+		$('#loc_info').scrollTo(tag,500);
+	});
+}
+function up_operate(){
+	var llid=$('img[lid='+cur_location+']').attr('up_lid');
+	if (llid!=1)
+		get_map(llid,'click');
+}
+function back_operate(){
+	get_map(cur_location,'back');
+}
+function forward_operate(){
+	get_map(cur_location,'forward');
+}
+
+var back_tweet_id=0;
+//点击评论按钮出发的事件
+function sendcomment(back_id,tweet_id){
+	$('#feed_concise').scrollTo('#fc_comment',500);
+
+	$('#ct_mini_back').click(function(){
+	   $('#feed_concise').scrollTo('.mini_feed[tweet_id='+back_id+']',500);
+	});
+
+}
+function get_back(){
+   if (back_tweet_id!=0){}
+
+}
+//点击转发按钮出发的事件
+function sendtweet(parent,retweet,location,activity,back_id,lname,aname){
+	$('#feed_concise').scrollTo('#fc_retweet',500);
+
+	$('#rt_mini_back').click(function(){
+			//$('#feed_concise').scrollTo('#fc1',0);
+	   		$('#feed_concise').scrollTo('.mini_feed[tweet_id='+back_id+']',500);
+	});
+
+	$('#par_mini').val(parent);
+	$('#ret_mini').val(retweet);
+	$('#loc_mini').val(lname);
+	$('#act_mini').val(aname);
+	$('[tagid=#act_mini]').val(activity);
+	$('[tagid=#loc_mini]').val(location);
+	if (parent!=retweet){
+		$('#con_mini').val("//"+$('.namecard[tweet_id='+parent+']').html()+":"+$('[rel=tweet_content][tweet_id='+parent+']').html());
+	}
+}
+
+</script>
+
+	<div id='map_edge' style='position:fixed;background:#ffffff;'>
+	<!--地图-->
+	<div id='map_box' >
+		<!--地图导航栏-->
+		<div id='map_navi'>
+			<div id='loc_info'>
+				<ul class='info_mask'>
+					<li class='infoli' id='info1'>
+					</li>
+					<li class='infoli' id='info2'>
+					</li>
+				</ul>
+			</div>
+			<div id='map_op'>
+				<a title='回到上一级' class='map_navi_button' tag='#box2' id='up' href='javascript:void(0);' onclick='up_operate();'></a>
+				<a title='后退' class='map_navi_button' tag='#box2' id='back' href='javascript:void(0);' onclick='back_operate();'></a>
+				<a title='前进' class='map_navi_button' tag='#box4' id='next' href='javascript:void(0);' onclick='forward_operate();'></a>
+			</div>
+		</div>
+		<!--主栏-->
+		<div id='map_main'>
+			<ul id='map_mask'>
+
+			</ul>
+		</div>
+	</div>
+	</div>
+
+	<!--右侧栏-->
+	<div id='info_box' style='position:fixed;'>
+		<div id='tab_bar'>
+			<a class='prev'></a>
+			<ul id='mini_navi'>
+				<li>本地活动</li>
+				<li>本地微博</li>
+				<li>在线用户</li>
+				<li>发微博</li>
+				<li>留言</li>
+			</ul>
+			<a class='next'></a>
+		</div>
+		<div id='feed_concise'>
+			<ul id='fc_mask'>
+				<li class='fc_li' id='fc2'>
+					<ul id='fc2_sub_mask' class='mini_vertical_items'>
+					</ul>
+				</li>
+				<li class='fc_li' id='fc1'>
+					<!--吐槽页-->
+					<ul id='fc1_sub_mask' class='mini_vertical_items'>
+					</ul>
+				</li>
+				<li class='fc_li' id='fc_online'>
+					<ul id='fc3_sub_mask' class='mini_vertical_items'>
+					</ul>
+				</li>
+				<li class='fc_li' id='fc_retweet'>
+					<ul id='fc4_sub_mask' class='mini_vertical_items'>
+						<div class='tweet_new_main'>
+								<%=form_for(Tweet.new,:remote=>true) do|t|%>
+								  <div class='tweet_new_img'>
+								  	有什么想吐槽的？
+								  </div>
+								  <div class='mini_tweet_new_l'  style='margin-left:22px;'>
+
+								  <%=render :partial=>'locations/autopick',:locals=>{:inputid=>'loc_mini',:location_id=>0}%>
+								  </div>
+								  <br/>	<br/><br/>
+								  <div class='mini_tweet_new_a' style='margin-left:22px;'>
+								  <%=render :partial=>'activities/autopick',:locals=>{:inputid=>'act_mini',:l_inputid=>'loc_mini',:activity_id=>0}%>
+								  </div>
+					
+
+
+								    <%=t.text_area :content,:class=>'cont_mini'%>
+								    <div class='file'>
+									    <div class='file_wrapper'>
+									    <%=t.file_field :t_photo,:class=>:input_img%>
+										</div>
+										<button class='file_button'>上传图片</button>
+									</div>
+								  	<%=t.hidden_field :retweet_id,:value=>0%>
+								  	<%=t.hidden_field :parent_id,:value=>0%>
+								    <%=t.submit '发布' ,:class=>'b_mini'%>
+								<% end %>
+						</div>
+					<a href='javascript:void(0);' class='mini_back' id='rt_mini_back'>Back</a>
+					</ul>
+				</li>
+				<li class='fc_li' id='fc_comment'>
+					<ul id='fc5_sub_mask' class='mini_vertical_items'>
+					留言页
+					<a href='javascript:void(0);'  class='mini_back' id='ct_mini_back'>Back</a>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>

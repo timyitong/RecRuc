@@ -1,0 +1,42 @@
+<%= form_for(@location_map_point) do |f| %>
+  <% if @location_map_point.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location_map_point.errors.count, "error") %> prohibited this location_map_point from being saved:</h2>
+
+      <ul>
+      <% @location_map_point.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%=render :partial=>'locations/autopick',:locals=>{:inputid=>'locations_ap1',:location_id=>location_id}%>
+  <div class="field">
+    <%= f.label :point_name %><br />
+    <%= f.text_field :point_name %>
+  </div>
+  <div class="field">
+    <%= f.label :target_id %><br />
+    <%= f.number_field :target_id %>
+  </div>
+  <div class="field">
+    <%= f.label :cox %><br />
+    <%= f.number_field :cox %>
+  </div>
+  <div class="field">
+    <%= f.label :coy %><br />
+    <%= f.number_field :coy %>
+  </div>
+  <div class="field">
+    <%= f.label :location_map_id %><br />
+    <%= f.number_field :location_map_id %>
+  </div>
+  <div class="field">
+    <%= f.label :point_img_id %><br />
+    <%= f.number_field :point_img_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

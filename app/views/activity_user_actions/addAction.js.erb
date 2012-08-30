@@ -1,0 +1,10 @@
+$('<div id="dialog" title="消息"><p><%=@message.to_s%></p></div>').dialog();
+setTimeout("disclose();",1000);
+function disclose()
+{
+	$('.ui-dialog').fadeOut(500);
+	$('#dialog').fadeOut(500);
+	
+    setTimeout("$('#dialog').dialog('destroy');$('#dialog').remove();",700);
+}
+

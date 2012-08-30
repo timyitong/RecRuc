@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  point_id: 1
+  imgurl: MyString
+
+two:
+  point_id: 1
+  imgurl: MyString

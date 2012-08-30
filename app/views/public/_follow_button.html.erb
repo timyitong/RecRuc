@@ -1,0 +1,14 @@
+<%
+  if target=='tag'
+  	check=UserFollowTag.exists?(["user_id=? and follow_id=?",session[:current_user_id],follow_id])
+  elsif target=='location'
+  	check=UserFollowLocation.exists?(["user_id=? and follow_id=?",session[:current_user_id],follow_id])
+  elsif target=='user'
+  	check=UserFollowUser.exists?(["user_id=? and follow_id=?",session[:current_user_id],follow_id])
+  end	
+%>
+<% if check%>
+	<div class='follow_button_cancel' type='<%=target%>_id' follow_id='<%=follow_id%>' followbutton='cancel'>取消关注</div>
+<%else%>
+	<div class='follow_button'  type='<%=target%>_id' follow_id='<%=follow_id%>' followbutton='follow'>关注</div>
+<%end%>

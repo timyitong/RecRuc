@@ -1,0 +1,17 @@
+<%= form_for(@activity_tweet) do |f| %>
+  <% if @activity_tweet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity_tweet.errors.count, "error") %> prohibited this activity_tweet from being saved:</h2>
+
+      <ul>
+      <% @activity_tweet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

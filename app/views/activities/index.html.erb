@@ -1,0 +1,46 @@
+
+<%=stylesheet_link_tag 'activities'%>
+<%=javascript_include_tag javascript_path('activity_index')%>
+
+<% @activities.each do |activity| %>
+<div class='feed_main'>
+  <div class='feed_c_main'>
+    <div class='feed_content'>
+      <div class='feed_c_head'>
+        <%=activity.user.name%>
+        <%=link_to activity.location.name, location_path(activity.location)%><br/>
+        <strong>开始时间：</strong>
+        <%=activity.starttime.strftime('%Y年%m月%d日  %H:%M')%>
+        <strong>结束时间：</strong>
+        <%= activity.endtime!=nil ? activity.endtime.strftime('%Y年%m月%d日  %H:%M') : ''%>
+      </div>
+    	<div class='feed_c_title'>
+      <%= link_to activity.title, activity %>
+  	  </div>
+      <%if activity.photo_file_name !=nil%>
+    	   <%=image_tag activity.photo.url(:large) %>
+      <%end%>
+      <div class='feed_c_intro'>
+        <%=simple_format(activity.slogan)%>
+      </div>
+    	<div class='feed_c_operate'>
+         <a href='javascript:void(0);' activity_id='<%=activity.id%>' class='comment_button'>留言</a>
+    	   <%=render :partial=>'activities/operate_button', :locals=>{:action_type=>'share',:activity_id=>activity.id,:note=>''}%>
+    	   <%=render :partial=>'activities/operate_button', :locals=>{:action_type=>'watch',:activity_id=>activity.id,:note=>''}%>
+    	   <%=render :partial=>'activities/operate_button', :locals=>{:action_type=>'in',:activity_id=>activity.id,:note=>''}%>
+    	</div>
+    </div>
+    <div class='activity_comment_main' activity_id='<%=activity.id%>'>
+
+    </div>
+  </div>
+</div>
+
+
+
+<% end %>
+
+
+<br />
+
+

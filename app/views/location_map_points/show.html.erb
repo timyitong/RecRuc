@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Point name:</b>
+  <%= @location_map_point.point_name %>
+</p>
+
+<p>
+  <b>Target:</b>
+  <%= @location_map_point.target_id %>
+</p>
+
+<p>
+  <b>Cox:</b>
+  <%= @location_map_point.cox %>
+</p>
+
+<p>
+  <b>Coy:</b>
+  <%= @location_map_point.coy %>
+</p>
+
+
+<%= link_to 'Edit', edit_location_map_point_path(@location_map_point) %> |
+<%= link_to 'Back', location_map_points_path %>

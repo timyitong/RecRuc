@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Activity:</b>
+  <%= @activity_ref.activity_id %>
+</p>
+
+<p>
+  <b>Ref name:</b>
+  <%= @activity_ref.ref_name %>
+</p>
+
+<p>
+  <b>Refnum:</b>
+  <%= @activity_ref.refnum %>
+</p>
+
+
+<%= link_to 'Edit', edit_activity_ref_path(@activity_ref) %> |
+<%= link_to 'Back', activity_refs_path %>

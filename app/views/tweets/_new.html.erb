@@ -1,0 +1,26 @@
+<%=stylesheet_link_tag 'tweet_new'%>
+
+<div class='tweet_new_main'>
+		<%=form_for(Tweet.new) do|t|%>
+		  <div class='tweet_new_a'>
+		  <%=render :partial=>'activities/autopick',:locals=>{:inputid=>'activities_ap1',:l_inputid=>'locations_ap1',:activity_id=>activity_id}%>
+		  </div>
+		  <div class='tweet_new_l'>
+		  <%=render :partial=>'locations/autopick',:locals=>{:inputid=>'locations_ap1',:location_id=>location_id}%>
+		  </div>
+
+		    <%=t.text_area :content ,:value=>parent_id!=retweet_id ? d_text : '',:placeholder=>'有什么想要告诉大家？'%>
+		    <div class='file'>
+			    <div class='file_wrapper'>
+			    <%=t.file_field :t_photo,:class=>:input_img%>
+				</div>
+				<button class='file_button'>上传图片</button>
+			</div>
+		  	<%=t.hidden_field :retweet_id,:value=>retweet_id%>
+		  	<%=t.hidden_field :parent_id,:value=>parent_id%>
+		    <%=t.submit '' ,:class=>'b'%>
+		<% end %>
+</div>
+
+
+

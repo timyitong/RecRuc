@@ -1,0 +1,29 @@
+
+<div id='user_info'>
+<p>
+  <%=link_to @user.name, @user %>
+</p>
+</div>
+<div id='user_main_content'>
+<div id='publish_box'>
+	<%=form_for(Tweet.new) do |f|%>
+	<%=f.text_field :content%>
+	<%=f.submit 'Publish'%>
+	<%=f.file_field :photo%>
+	<%end%>
+</div>	
+
+<p>
+  <% count=1 
+  @user.user_groups.each do |t,i| %>
+  <%=link_to t.name, {:controller=>:tweets,:action=>:index_group,:user_group_id=>t.id}, :remote=> true, :class=>'user_group', :id=>'user_group'+count.to_s%> |
+  <% 
+  count+=1
+  end%>
+</p>
+
+
+<div id='tweets_box'>
+<%=image_tag image_path('loading.gif')%>
+</div>
+</div>

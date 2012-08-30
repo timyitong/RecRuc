@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @tweet.user_id %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @tweet.location_id %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @tweet.content %>
+</p>
+
+<p>
+  <b>Retweets:</b>
+  <%= @tweet.retweetsnum %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @tweet.commentsnum %>
+</p>
+<p>
+  <b>da:</b>
+  <%=image_tag @tweet.t_photo.url(:large) %>
+</p>
+<p>
+  <b>xiao:</b>
+  <%=image_tag @tweet.t_photo.url(:small) %>
+</p>
+
+<p>
+  <b>@:</b>
+  <%if @tweet.tweet!=nil%>
+  <%= @tweet.tweet.id %>|<%= @tweet.tweet.content %>|<%= @tweet.tweet.retweet_id %>
+  <%end%>
+</p>
+
+<h2>评论：</h2>
+<% @tweet.comments.each do |comment| %>
+  <p>
+    <b>Commenter:</b>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <b>Comment:</b>
+    <div class='tweet_content'>
+    <%= comment.content %>
+    </div>
+  </p>
+<% end %>
+ 
+
+ 
+<br />
+
+<%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+<%= link_to 'Back', tweets_path %>

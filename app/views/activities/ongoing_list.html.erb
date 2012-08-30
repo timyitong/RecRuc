@@ -1,0 +1,6 @@
+<div class='ongoing_head'>正在发生</div>
+<ul>
+<%@activities.each do |a|%>
+ <li><%=link_to a.title,activity_path(a),:class=>'ongoing_line'%></li>
+<%end%>
+</ul>

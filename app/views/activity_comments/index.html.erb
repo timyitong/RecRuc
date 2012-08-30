@@ -1,0 +1,16 @@
+
+<%=render :partial=>'activity_comments/new',:locals=>{:activity_id=>@activity_id}%>
+<% @activity_comments.each do |activity_comment| 
+   user=User.find(activity_comment.user_id)
+  %>
+  <div class='ac_line'>
+    <%=image_tag user.avatar.url(:mini), :class=>'avatar_mini'%>
+    <%=link_to user.name, user_path(user), :class=>'ac_user_name'%><br/>
+    <span class='ac_content'><p><%= activity_comment.content %></p></span><br/>
+    <span style='color:#666;margin-left:60px;font-size:12px;'><%=activity_comment.created_at.strftime('%Y-%m-%d %H:%M')%></span>
+
+  </div>
+<% end %>
+
+
+

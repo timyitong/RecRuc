@@ -1,0 +1,83 @@
+// Place all the styles related to the Tags controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+@mixin font($size){
+		font-family:"Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+	font-size:$size;
+}
+.tag_main{
+	width:75%;
+	height:auto;
+	float:left;
+	@include radius1(10px);
+	background-color: #ffffff;
+	margin-top:10px;
+}
+.tags_icon{
+	width:64px;
+	height:64px;
+	float:left;
+	display:block;
+	background-repeat:no-repeat;
+	margin:10px;
+	border:1px solid #ddd;
+	@include radius1(8px);
+}
+.tag_right{
+	float:left;
+	width:80%;
+
+}
+
+.tag_wiki{
+	font-size:8pt;
+	float:left;
+	text-align:left;
+	p{
+
+	}
+}
+.tag_edit_button{
+
+	float:right;
+	@include font(6pt);
+
+}
+.tag_refnum{
+	width:auto;
+	height:auto;
+	float: left;
+	@include font(12px);
+}
+#tag_feed{
+	float:left;
+	width:75%;
+}
+.tag_o{
+    background-color: #ffffff;
+    width:100%;
+    float:left;
+}
+.tag_o_button{
+	cursor:pointer;
+	width:100px;
+	float:left;
+
+}
+.tag_o_button:hover{
+@extends .tag_o_button;
+	background-color: #DDD;
+}
+.tag_o_button_clicked{
+@extends .tag_o_button;
+	background-color: #DDD;
+}

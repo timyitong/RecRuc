@@ -1,0 +1,21 @@
+<script>
+$(function(){
+	location_pick_box('#lc',function(){});
+
+});
+</script>
+<%=stylesheet_link_tag 'location_edit'%>
+
+<div class='le_main'>
+
+	<%=render :partial=>'locations/new'%>
+
+
+	<div id='lc' location_id='22' class='location_pick_box'>
+	</div>
+	<div style='background:url(<%=image_path('location_edit_teach-1.gif')%>)' class='le_teach'>
+	</div>
+
+	<div class='next'></div>
+</div>
+

@@ -1,0 +1,48 @@
+<%=stylesheet_link_tag 'locations'%>
+<script>
+$(document).ready(function(){
+	$('.profile_o_button').click(function(){
+		var lid=$(this).attr('lid');
+		var at=$(this).attr('action_type');
+		//document.write(__SITE__+"/activity_user_actions?part=true&user_id="+uid+"&action_type="+at);
+		if (at=='activity')
+		{
+		$('#location_feed').load(__SITE__+"/activities?part=true&location_id="+lid+"&action_type="+at);
+		}else if (at=='tweet'){
+		$('#location_feed').load(__SITE__+"/tweets/list?part=true&location_id="+lid+"&action_type="+at);
+		}
+		$('.profile_o_button_clicked[action_type!='+at+']').attr('class','profile_o_button');
+		$('.profile_o_button[action_type='+at+']').attr('class','profile_o_button_clicked');
+	});
+	$('.profile_o_button:first').click();
+});
+</script>
+<div id='location_show'>
+	<div id='location_head'>
+	<%=render :partial=>'public/icon', :locals=>{:icon_type=>'location',:obj=>@location}%>
+	<div class='location_title'>
+	<%=@location.name%>
+	<%=link_to '编辑', edit_location_path(@location)%>
+	<%=link_to '编辑地图', edit_location_map_path(@location.location_map)%>
+	</div>
+	<br/>
+	<div class='location_wiki'>
+	<%=@location.wiki%>
+	</div>
+
+
+	</div>
+	<div class='location_o'>
+			<%=render :partial=>'public/follow_button',:locals=>{:target=>'location',:follow_id=>@location.id}%>
+
+	<%=link_to '我在这里',{:controller=>:locations,:action=>:at_here,:location_id=>@location.id},:remote=>true,:class=>'at_here_button'%>
+	</div>
+	<div class='location_o'>
+		<a class='profile_o_button' lid='<%=@location.id%>' action_type='tweet'>最新微博</a><a class='profile_o_button' lid='<%=@location.id%>' action_type='activity'>最新活动</a>
+	</div>
+</div>
+<div id='location_feed'>
+</div>
+
+
+

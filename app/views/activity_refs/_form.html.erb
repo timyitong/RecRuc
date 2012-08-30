@@ -1,0 +1,29 @@
+<%= form_for(@activity_ref) do |f| %>
+  <% if @activity_ref.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity_ref.errors.count, "error") %> prohibited this activity_ref from being saved:</h2>
+
+      <ul>
+      <% @activity_ref.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :activity_id %><br />
+    <%= f.number_field :activity_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ref_name %><br />
+    <%= f.text_field :ref_name %>
+  </div>
+  <div class="field">
+    <%= f.label :refnum %><br />
+    <%= f.number_field :refnum %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

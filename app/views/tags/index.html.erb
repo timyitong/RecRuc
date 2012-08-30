@@ -1,0 +1,20 @@
+
+<%= link_to 'New Tag', new_tag_path,:class=>'normal_button'%><br/>
+<table style='width:70%;float:left;'>
+
+<% i=0 
+@tags.each do |tag| %>
+  <% if i==0%>
+  <tr>
+  <%end%>
+    <td><%=link_to tag.name+'('+tag.refnum.to_s+')',tag ,:class=>'tag_button'%></td>
+    <!--<td><%= link_to 'Destroy', tag, confirm: 'Are you sure?', method: :delete %></td>-->
+  <%i+=1
+  if i==4
+    i=0%>
+    </tr>
+  <%end%>
+<% end %>
+</table>
+
+

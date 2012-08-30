@@ -1,0 +1,61 @@
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+@mixin fm{
+   font-family:"Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+}
+
+.le_teach{
+	width:800px;
+	height:200px;
+	margin-left:20px;
+}
+#lc{
+	margin-left:25%;
+	background-color: white;
+	@include radius1(5px);
+	margin-top:200px;
+}
+.add_new_location{
+  display: block;
+  width:100px;
+  height:25px;
+  background:url('add.gif') no-repeat #666666;
+  float:left;
+  text-decoration:none;
+  color:white;
+  position:fixed;
+  left:700px;
+  top:280px;
+ @include fm;
+}
+.add_new_location:hover{
+  @extend .add_new_location;
+  background:url('add-2.gif') no-repeat #8d8d8d;
+}
+.le_main{
+	background-color: white;
+	@include radius1(5px);
+	width:auto;
+	margin-left:20%;
+	min-height:400px;
+}
+.next{
+  position:relative;
+  right:10px;
+  bottom:10px;
+  background:url('next.png');
+  width:80px;
+  height:40px;
+  margin-left:80%;
+  cursor: pointer;
+}
+.next:hover{
+	@extend .next;
+	background:url('next-2.png');
+}

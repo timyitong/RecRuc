@@ -1,0 +1,27 @@
+<h1>Listing activity_refs</h1>
+
+<table>
+  <tr>
+    <th>Activity</th>
+    <th>Ref name</th>
+    <th>Refnum</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activity_refs.each do |activity_ref| %>
+  <tr>
+    <td><%= activity_ref.activity_id %></td>
+    <td><%= activity_ref.ref_name %></td>
+    <td><%= activity_ref.refnum %></td>
+    <td><%= link_to 'Show', activity_ref %></td>
+    <td><%= link_to 'Edit', edit_activity_ref_path(activity_ref) %></td>
+    <td><%= link_to 'Destroy', activity_ref, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Activity ref', new_activity_ref_path %>

@@ -1,0 +1,99 @@
+
+//开始加载
+
+
+
+
+    var up_id=0;
+    var cur_location={};
+    var points;
+
+    
+    
+////////////////////////////////////基本操作部分    
+//图片部分
+	function load_points(id){
+	  var url='http://localhost:3000/location_map_points';
+	  data={};
+	  if (id!=null) data['location_id']=id;
+	  $('#map_box').empty();
+	  $.getJSON(url,data,function(json){
+	    var i=0;
+	    points=json;
+	    while (i<json.length){
+	    	var html="<div onclick='show_location_info("+json[i].target_id+");' class='point_button' style='width:"+json[i].width+"px;height:"+json[i].height+"px;left:"+json[i].cox+"px;top:"+json[i].coy+"px;'></div>";
+	  		$('#map_box').append(html);
+	  		
+	  		i++;
+	  	}
+
+	  });	
+	}
+//文字部分
+	function getup(){
+	    if (cur_id!=1) load_locations(up_id);
+	}
+	function load_locations(id){
+		$('#info_index').empty();
+		var url='http://localhost:3000/locations';
+		if (id!=null) url=url+'?id='+id;
+		var data={};
+		//load locations index
+		$.getJSON(url,data,function (json){
+			var i=0;
+			
+			while (i<json.length)
+			{
+				var html='<div><a href="javascript:void(0)" onclick="load_locations('+json[i].id+')">'+json[i].name+'</a><a href="javascript:void(0);" onclick="show_location_info('+json[i].id+');">show</a></div>';
+				$('#info_index').append(html);
+				i++;
+			}
+		    up_id=cur_id;
+		    cur_id=id;
+		});
+		
+		//load location route
+		var url2='http://localhost:3000/locations/'+id;
+		var data2={};
+		$.getJSON(url2,data2,function (json){
+			cur_location['name']=json.name;
+			cur_location['uptree']=json.uptree;
+		
+		    var rs=new Array();
+		    rs=json.uptree.match(/\d+/g);
+		    $('.routeline').empty();
+		    //$('.routeline').append('::'+rs.length+'::');
+			if (rs!=null){
+			   var i=0;
+			   while(i<rs.length){
+			   	$('.routeline').append('>><a id="route_'+rs[i]+'" href="javascript:void(0);" onclick="load_locations('+rs[i]+');"></a>');
+				
+			   	$.getJSON('http://localhost:3000/locations/'+rs[i],{},function(json){
+			   		$('#route_'+json.id).text(json.name);
+			   		//document.write(json.name);
+			   	});
+			   	i++;
+			   }
+			   
+			}
+			$('.routeline').append('>>'+'<a id="route_x">'+json.name+'</a>');
+
+			
+			
+		});
+		
+	}
+	
+	function show_location_info(id){
+		var url='http://localhost:3000/locations/'+id;
+		var data={};
+		$.getJSON(url,data,function (json){
+			cur_location['name']=json.name;
+			cur_location['uptree']=json.uptree;
+					var html='<div>'+cur_location['name']+'</div>';
+					$('#info_main').empty();
+					$('#info_main').append(html);
+		});
+	}
+
+

@@ -1,0 +1,27 @@
+<h1>Listing user_curlocations</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Location</th>
+    <th>Open time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_curlocations.each do |user_curlocation| %>
+  <tr>
+    <td><%= user_curlocation.user_id %></td>
+    <td><%= user_curlocation.location_id %></td>
+    <td><%= user_curlocation.open_time %></td>
+    <td><%= link_to 'Show', user_curlocation %></td>
+    <td><%= link_to 'Edit', edit_user_curlocation_path(user_curlocation) %></td>
+    <td><%= link_to 'Destroy', user_curlocation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User curlocation', new_user_curlocation_path %>

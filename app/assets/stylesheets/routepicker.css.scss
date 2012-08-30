@@ -1,0 +1,71 @@
+@mixin title_font{
+    font-family:"幼圆";
+    font-size:13pt;
+    
+}
+
+@mixin radius1($radwidth){
+    -moz-border-radius: $radwidth $radwidth $radwidth $radwidth;
+  border-top-right-radius:$radwidth;
+  border-top-left-radius:$radwidth;
+  border-bottom-right-radius:$radwidth;
+  border-bottom-left-radius:$radwidth;
+　　border-radius: $radwidth $radwidth $radwidth $radwidth;
+}
+@mixin button_common{
+    width:auto;
+  height:25px;
+  background:#2796D8;
+  text-decoration: none;
+  font-size:12pt;
+  color:white;
+  border:solid 1px black;
+  font-family:"幼圆";
+  padding:1px;
+  
+  margin-left:3px;
+  margin-right:3px;
+  
+  @include radius1(5px);
+}
+
+#routepicker_box{
+}
+#rp_cur_title{
+	@include title_font;
+	float:left;
+	height:auto;
+}
+#rp_cur{
+	float:left;
+	@include title_font;
+	width:auto;
+}
+#rp_route{
+	float:left;
+	width:100%;
+	height:30px;
+	text-align:left;
+	span{
+	  @include title_font;
+	}
+}
+#rp_locations{
+  width:100%;
+  height:auto;
+  float:left;
+  background: #E0EAF1;
+  padding-top:5px;
+  @include radius1(10px);
+  text-align:right;
+}
+.location_namecard{
+  @include button_common;
+}
+#rp_switch{
+  background:url('routepicker_button.gif');
+  display: block;
+  width:12px;
+  height:12px;
+  float:left;
+}

@@ -1,0 +1,62 @@
+<%=stylesheet_link_tag 'activities'%>
+<script>
+
+$(function(){
+/*		$('#collection_main').load(__SITE__+"/activity_user_actions?part=true&user_id=<%=session[:current_user_id]%>&action_type=in",function(){
+		});
+*/
+
+<% if @date[:todaynum]>=0%>
+	$('.c_content:eq(<%=@date[:todaynum]%>)').css('background','#ffc');
+<%end%>
+
+
+});
+</script>
+<div id='collection_top' style='margin-top:10px;'>
+	<div class='f_c_line'>
+		<a class='collection_switch_button' style='float:right;margin-right:10px;'>日历模式</a><%=image_tag image_path('calendar_icon.png'),:style=>'float:right'%>
+	</div>
+	<div class='f_c_line'>
+		<a class='date-back' href='/activities/collection?move=<%=@date[:move].to_i-7%>'>
+			上周
+		</a>
+		<a class='date-next'  href='/activities/collection?move=<%=@date[:move].to_i+7%>'>
+			下周
+		</a>
+		<span style='float:right;margin-right:10px;'><%=@date[:s_date].strftime('%m月%d日')%>--<%=@date[:e_date].strftime('%m月%d日')%></span>
+	</div>
+</div>
+<div id='collection_main' style='margin-top:10px;'>
+<table class="calendar_table" style="width:100%" cellspacing="0">
+	<thead>
+		<tr class="fc-first fc-last">
+			<%i=1
+			while i<=7 do%>
+				<th class="c_header  <%= i==7 ? 'c_header_last' : '' %>" style="width: 92px; ">
+					<%=['','周一','周二','周三','周四','周五','周六','周日'][i]%> <%=(@date[:s_date]+(i-1).days).strftime('%m/%d')%>
+				</th>
+			<%i+=1
+			end%>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="fc-week0 fc-first fc-last">
+			<%i=1
+			while i<=7 do%>
+			<td class="c_content <%= i==7 ? 'c_content_last' : '' %>">
+				<div style='  min-height:460px;'>
+				 	<%@collection[i].each do |a|%>
+				 		<a class='activity_item' href='/activities/<%=a.id%>'>
+						<%=a.starttime.strftime('%H:%M')%><br/>
+						<%=a.title%>
+						</a>
+					<%end%>
+				</div>
+			</td>
+			<%i+=1
+			end%>
+		</tr>
+	</tbody>
+</table>
+</div>

@@ -1,0 +1,81 @@
+<html>
+<head>
+  <title>RecRuc</title>
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" /> 
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/x-icon" />
+<link rel="shortcut icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+<link rel="icon" href="<%=image_path('favicon.ico')%>" type="image/vnd.microsoft.icon" /> 
+</head>
+
+<%=stylesheet_link_tag 'login'%>
+<%=javascript_include_tag 'jquery'%>
+<script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {  
+    $('a.register').toggle(function () {  
+      $('#main').scrollTo($(this).attr('href'), 500);
+      $('a.register').attr('href','#login');
+      $('a.register').html('登录'); 
+      return false;  
+    },function(){
+      $('#main').scrollTo($(this).attr('href'), 500);
+      $('a.register').attr('href','#register');
+      $('a.register').html('注册'); 
+      return false;  
+    });  
+  });
+</script>
+
+
+
+<div id='menu'>
+	<a class='register' href='#register'>
+		注册
+	</a>
+</div>
+
+<div id='main'>
+      <ul id="mask">
+          <li id="login" class="box">
+              
+                <div class="content">
+
+						<div id='box'>
+						<div id='logo'></div>
+						<%=form_tag('/users/check', :method=>:get) do%>
+							<%= text_field :user,:email ,:placeholder=>"邮箱"%>
+							<%=password_field :user,:password,:placeholder=>"密码" %>
+							<div class="actions">
+							<%=submit_tag '登录' ,:class=>'submit'%>
+							</div>
+						<%end%>
+						</div>
+
+						
+                </div>
+            </li><!-- end box1 -->
+            <li id="register" class="box">
+                <div class="content">
+                		<div id='box'>
+				 		<div id='logo'></div>
+						<div id='main_header'>
+						</div>
+					    <div id='note'>
+						<%=notice%>
+						</div>
+						<%=form_tag('/users/reg', :method=>:post) do%>
+						    <%=text_field :user,:email ,:placeholder=>'邮箱'%>
+						    <%=text_field :user,:name ,:placeholder=>'昵称'%>
+						    <%=password_field :user,:password ,:placeholder=>'密码'%>
+						  	<%=password_field :user,:password_confirmation,:placeholder=>'密码确认'%>
+			
+						    <%=submit_tag '注册' ,:class=>'submit'%>
+						<% end %>              	
+						</div>
+                </div>
+            </li><!-- end box2 -->
+        </ul><!-- end mask -->
+</div>
+</html>
+

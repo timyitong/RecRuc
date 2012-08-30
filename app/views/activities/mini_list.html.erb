@@ -1,0 +1,116 @@
+
+<%=stylesheet_link_tag 'activities'%>
+<script>
+$(function(){
+  $('.f_c_text').mouseenter(function(){
+    $(this).animate({'opacity':'0.95'},100);
+  });
+  $('.f_c_text').mouseleave(function(){
+    $(this).animate({'opacity':'0'},0);
+  });
+
+//将收藏完后的心变成红色
+  $('li.collect a').bind('ajax:success',function(evt,data,status,xhr){
+    $(this).css('background-position','0 -34px');
+    $(this).html(parseInt($(this).html())+1);
+    $(this).attr('href','javascript:void(0);')
+  });
+
+});
+</script>
+
+<%
+i=0
+@activities.each do |t|%>
+<li class='mini_feed_d' num='<%=i%>' act_id='<%=t.id%>'>
+ <div class='feed_c_d'>
+    <ul class='feed_c_img'>
+
+      <%if t.photo_file_name !=nil%>
+         <li class='f_c_over'>
+          <%=image_tag t.photo.url(:small) %>
+         </li>
+        <li class='f_c_text'>
+              <div class='f_c_line'>
+                  <strong>
+                        <%= link_to t.title, t %>
+                        </strong>
+                        </div>
+                        <div class='f_c_line'>
+                        <div class='f_c_time'>
+                        <%=t.location.name%>
+                        <br/>
+                        <%=t.starttime.strftime('%m月%d日  %H:%M')%>
+                  </div>
+              </div>
+                  <div class='f_c_line'>
+
+                    <div class='feed_c_tag'>
+                      <%t.tags.each do |tag|%>
+                        <%=link_to tag.name,tag_path(tag),:class=>'tag_button'%>
+                      <%end%>
+                    </div>
+                  </div>
+         </li>
+      <%else%>
+        <li class='f_c_over' style='opacity:1;'>
+              <div class='f_c_line'>
+                  <strong>
+                        <%= link_to t.title, t %>
+                        </strong>
+                        </div>
+                        <div class='f_c_line'>
+                        <div class='f_c_time'>
+                        <%=t.location.name%>
+                        <br/>
+                        <%=t.starttime.strftime('%m月%d日  %H:%M')%>
+                  </div>
+              </div>
+                  <div class='f_c_line'>
+
+                    
+                      <%t.tags.each do |tag|%>
+                        <%=link_to tag.name,tag_path(tag),:class=>'tag_button'%>
+                      <%end%>
+          
+                  </div>
+         </li>
+      <%end%>
+         
+    </ul>
+    <ul class='tools'>
+                  <li class='collect'>
+                    <%if ActivityUserAction.where(:activity_id=>t.id,:user_id=>session[:current_user_id],:action_type=>'in').exists?%>
+                    <a title='收藏'  style='background-position:0 -34px;' href='javascript:void(0);'>
+                      <%=ActivityRef.where(:activity_id=>t.id,:ref_name=>'in').first.refnum%>
+                    </a>
+
+                    <%else%>
+                    <a title='收藏'  data-remote='true' href=" /activity_user_actions/addAction?action_type=in&note=''&activity_id=<%=t.id%>">
+                      <%=ActivityRef.where(:activity_id=>t.id,:ref_name=>'in').first.refnum%>
+                    </a>
+                    <%end%>
+                  </li>
+                  <li class='comment'>
+                    <a title='评论'>
+                    <%=ActivityRef.where(:activity_id=>t.id,:ref_name=>'comment').first.refnum%>
+                    </a>
+                  </li>
+    </ul>
+      
+        
+  </div>
+  <h2>
+    <a href='<%=user_path(t.user)%>'>
+    <%=image_tag image_path(t.user.avatar.url(:mini))%>
+    <%=t.user.name%>
+    </a>
+    <span style='float:left;margin-left:10px;'>发起</span>
+  </h2>
+</li>
+
+
+<%i+=1
+end%>
+<li class='mli' len='<%=i%>'>
+</li>

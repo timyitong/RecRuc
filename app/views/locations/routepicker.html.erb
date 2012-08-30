@@ -1,0 +1,34 @@
+<%=stylesheet_link_tag 'routepicker'%>
+
+<%location=@location%>
+<div id='rp_cur' location_id="<%=location.id%>">
+<%=location.name%>
+</div>
+<a id='rp_switch' href='javascript:void(0);' onclick='box_switch();'></a>
+<br/>
+<br/>
+<div id='rp_main'>
+	<div id='rp_route'>
+		<span>路径：</span>
+		<%location.uptree.chomp.split('-').each do|s|%>
+	
+			<%if s!='' 
+			@location2=Location.find(s.to_s)%>
+		
+			<%=image_tag image_path('arrow/arrow1.gif')%>
+			<%=link_to @location2.name,'javascript:void(0);',:class=>:location_namecard,:id=>'location_namecard_'+@location2.id.to_s,:onclick=>"load_locations_entire(#{@location2.id})"%>
+			<%end
+		end%>
+	</div>
+	<div id='rp_locations'>
+	<% location.location_have_locations.each do |l|
+		@location2=Location.find(l.child_id)
+	%>
+
+		<%=link_to @location2.name,'javascript:void(0);',:class=>:location_namecard,:id=>"location_namecard_#{@location2.id}",:onclick=>"load_locations_entire(#{@location2.id})"%>
+	<%end%>
+	</div>
+</div>
+
+
+

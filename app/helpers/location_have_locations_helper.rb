@@ -1,0 +1,2 @@
+module LocationHaveLocationsHelper
+end

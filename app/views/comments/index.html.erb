@@ -1,0 +1,14 @@
+      
+      <%= form_for(Comment.new,:remote=>true) do |f| %>
+          <%= f.hidden_field :tweet_id,:value=>@tweet_id.to_s%>
+          <%= f.text_area :content ,:class=>'activity_comment_feed_box'%>
+          <%= f.submit '发布',:class=>'activity_comment_feed_button'%>
+      <% end %>
+      
+<% @comments.each do |c| %>
+  <div class='ac_line'>
+    <%=image_tag c.user.avatar.url(:mini), :class=>'avatar_mini'%>
+    <%=link_to c.user.name, user_path(c.user), :class=>'user_name'%>
+    <span class='ac_content'>: <%= c.content %>(<%=c.created_at.strftime('%Y年%m月%d日 %H:%M')%>)</span><a class='comment_reply' href='javascript:void(0);'>回复</a>
+  </div>
+<% end %>
